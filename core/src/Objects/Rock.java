@@ -1,4 +1,4 @@
-package com.Objects;
+package Objects;
 
 public class Rock {
 }

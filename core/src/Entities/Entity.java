@@ -1,4 +1,4 @@
-package com.Entities;
+package Entities;
 
 public class Entity {
 }

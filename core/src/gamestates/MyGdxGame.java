@@ -1,4 +1,4 @@
-package com.gamestates;
+package gamestates;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;

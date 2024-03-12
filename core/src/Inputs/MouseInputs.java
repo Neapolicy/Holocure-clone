@@ -1,4 +1,4 @@
-package com.Inputs;
+package Inputs;
 
 public class MouseInputs {
 }
