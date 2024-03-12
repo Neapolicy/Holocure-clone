@@ -1,18 +1,23 @@
 package Main;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class MyGdxGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+public class Main extends ApplicationAdapter {
+	private SpriteBatch batch;
+	private Texture img;
+	private Music bgm;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("Entities/badlogic.jpg");
+		img = new Texture("Sprites/badlogic.jpg");
+		bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/SFX/gun_fire.wav"));
+		bgm.play();
 	}
 
 	@Override
@@ -27,5 +32,6 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		bgm.dispose();
 	}
 }
