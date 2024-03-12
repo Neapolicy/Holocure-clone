@@ -1,4 +1,4 @@
-package Inputs;
+package com.Game.Inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

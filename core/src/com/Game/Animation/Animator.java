@@ -1,4 +1,4 @@
-package Animation;
+package com.Game.Animation;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,10 +19,10 @@ public class Animator{
     // A variable for tracking elapsed time for the animation
     float stateTime;
 
-    public void createAnimation() {
+    public void createAnimation(String s) {
 
         // Load the sprite sheet as a Texture
-        walkSheet = new Texture(Gdx.files.internal("animation_sheet.png"));
+        walkSheet = new Texture(Gdx.files.internal(s));
 
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are
@@ -50,14 +50,14 @@ public class Animator{
         stateTime = 0f;
     }
 
-    public void render() {
+    public void render(int x, int y) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear screen
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
 
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
         spriteBatch.begin();
-        spriteBatch.draw(currentFrame, 50, 50); // Draw current frame at (50, 50)
+        spriteBatch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
         spriteBatch.end();
     }
 

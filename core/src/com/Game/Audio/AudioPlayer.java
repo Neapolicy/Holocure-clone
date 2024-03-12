@@ -1,4 +1,4 @@
-package Audio;
+package com.Game.Audio;
 
 public class AudioPlayer{
 
