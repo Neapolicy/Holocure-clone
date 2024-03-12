@@ -18,6 +18,7 @@ public class Main extends ApplicationAdapter {
 		img = new Texture("Sprites/badlogic.jpg");
 		bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/SFX/gun_fire.wav"));
 		bgm.play();
+		bgm.setLooping(true);
 	}
 
 	@Override

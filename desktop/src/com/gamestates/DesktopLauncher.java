@@ -9,7 +9,7 @@ public class DesktopLauncher { //desktop, don't touch unless you want to change 
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("My GDX Game");
+		config.setTitle("Holocure Made In China");
 		new Lwjgl3Application(new Main(), config);
 	}
 }
