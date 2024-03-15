@@ -4,6 +4,7 @@ import com.Game.myGdxGame;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Playing implements Screen {
     private Music bgm;
@@ -19,7 +20,9 @@ public class Playing implements Screen {
 
     @Override
     public void render(float delta) {
-
+        ScreenUtils.clear(255, 255, 255, 0);
+        game.batch.begin();
+        game.batch.end();
     }
 
     @Override
