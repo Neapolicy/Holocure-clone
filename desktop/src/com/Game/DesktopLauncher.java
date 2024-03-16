@@ -1,5 +1,7 @@
 package com.Game;
 
+import com.Game.gamestates.Menu;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import jdk.javadoc.internal.tool.Main;
@@ -10,6 +12,8 @@ public class DesktopLauncher { //desktop, don't touch unless you want to change 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.setTitle("Holocure Made In China");
+
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		new Lwjgl3Application(new myGdxGame(), config);
 	}
 }

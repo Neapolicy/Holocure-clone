@@ -3,6 +3,7 @@ package com.Game.gamestates;
 import com.Game.Animation.Animator;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,7 +20,7 @@ public class Menu implements Screen {
     }
     public void musicMan(){
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/menu_music.wav"));
-        bgm.setVolume(.5f);
+        bgm.setVolume(.3f);
         bgm.setLooping(true);
         bgm.play();
     }
@@ -27,6 +28,11 @@ public class Menu implements Screen {
         if (Gdx.input.isButtonJustPressed(0)){
             bgm.stop();
             game.setScreen(new Playing(game));
+        }
+    }
+    public static void controls(){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+            Gdx.app.exit();
         }
     }
 
@@ -40,6 +46,7 @@ public class Menu implements Screen {
         ScreenUtils.clear(0, 0, 0, 1);
         game.batch.begin();
         animator.render(0, 0);
+        controls();
         update();
         game.batch.end();
     }

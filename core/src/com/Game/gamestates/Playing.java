@@ -4,6 +4,7 @@ import com.Game.Entities.Enemy;
 import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,10 +12,13 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.ArrayList;
 
+import static com.Game.gamestates.Menu.controls;
+
 public class Playing implements Screen {
     private Music bgm;
     private myGdxGame game;
     private Player player;
+    private boolean paused;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
@@ -25,7 +29,7 @@ public class Playing implements Screen {
 
     public void musicMan(){
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/combat_music.wav"));
-        bgm.setVolume(.5f);
+        bgm.setVolume(.3f);
         bgm.setLooping(true);
         bgm.play();
     }
@@ -38,6 +42,7 @@ public class Playing implements Screen {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(255, 255, 255, 0);
+        controls();
         game.batch.begin();
         player.draw();
         for (Enemy enemy: enemies){
