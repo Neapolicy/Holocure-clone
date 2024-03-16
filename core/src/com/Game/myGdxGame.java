@@ -13,9 +13,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class myGdxGame extends Game{
 	public SpriteBatch batch;
+	public Animator animator;
 	
 	@Override
 	public void create () {
+		animator = new Animator();
 		batch = new SpriteBatch();
 		setScreen(new Menu(this));
 	}

@@ -12,17 +12,15 @@ public class Entity {
     public Sprite sprite;
     public Vector2 position;
     public Playing screen;
-    public Rectangle2D hitbox;
+    public Texture texture;
     public Entity(int speed, Texture text, int x, int y, Playing screen){
         this.speed = speed;
-        sprite = new Sprite(text);
+        texture = text;
+        sprite = new Sprite(texture);
         position = new Vector2(x, y);
         this.screen = screen;
     }
     public Vector2 getPosition(){
         return position;
-    }
-    public Rectangle2D getHitbox(){
-        return hitbox;
     }
 }
