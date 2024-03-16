@@ -13,7 +13,7 @@ public class DesktopLauncher { //desktop, don't touch unless you want to change 
 		config.setForegroundFPS(60);
 		config.setTitle("Holocure Made In China");
 
-//		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		new Lwjgl3Application(new myGdxGame(), config);
 	}
 }

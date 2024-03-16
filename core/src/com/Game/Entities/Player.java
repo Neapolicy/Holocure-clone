@@ -27,6 +27,7 @@ public class Player extends Entity{
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             position.x += speed * deltatime;
+            animator.render((int) position.x, (int) position.y);
         }
     }
     public void draw(){

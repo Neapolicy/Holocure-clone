@@ -55,10 +55,9 @@ public class Playing implements Screen {
         game.batch.begin();
         getTime();
         player.draw();
-//        for (Enemy enemy: enemies){
-//            enemy.draw(player.position);
-//        }
-//        player.getAnimator().render((int) player.position.x, (int) player.position.y);
+        for (Enemy enemy: enemies){
+            enemy.draw(player.position);
+        }
         game.batch.end();
     }
 
@@ -68,9 +67,8 @@ public class Playing implements Screen {
         int minutes = (int) (timePassed / 60);
         int seconds = (int) (timePassed % 60);
         // Display the timer
-        game.font.draw(game.batch, "Time Now", player.position.x, player.position.y);
         timerText = String.format("%02d:%02d", minutes, seconds);
-        game.font.draw(game.batch, timerText, 100, 100);
+        game.font.draw(game.batch, timerText, (float) Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight());
     }
 
     @Override
