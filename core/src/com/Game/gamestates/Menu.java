@@ -31,7 +31,7 @@ public class Menu implements Screen {
         }
     }
     public static void controls(){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){ // p to exit game
             Gdx.app.exit();
         }
     }
