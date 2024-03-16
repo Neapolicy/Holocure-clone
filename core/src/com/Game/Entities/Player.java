@@ -12,6 +12,7 @@ public class Player extends Entity{
     private Animator animator = new Animator();
     public Player(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
+        sprite.setScale(.1f);
         animator.createAnimation("Sprites/sprite_sheet_walk.png");
     }
     public void update(float deltatime) {
@@ -28,14 +29,12 @@ public class Player extends Entity{
             position.x += speed * deltatime;
         }
     }
-
-    public void playAnimation(){
-        animator.render((int) position.x, (int) position.y);
-        animator.dispose();
-    }
     public void draw(){
         update(Gdx.graphics.getDeltaTime());
         sprite.setPosition(position.x, position.y);
         sprite.draw(screen.getGame().batch);
+    }
+    public Animator getAnimator(){
+        return animator;
     }
 }

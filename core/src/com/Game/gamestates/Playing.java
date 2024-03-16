@@ -14,7 +14,7 @@ public class Playing implements Screen {
     private Player player;
     public Playing(myGdxGame game){
         this.game = game;
-        player = new Player(500, new Texture("Sprites/sprite_sheet_walk.png"), 0, 0, this);
+        player = new Player(500, new Texture("Sprites/bullet.png"), 0, 0, this);
         musicMan();
     }
 
@@ -35,6 +35,7 @@ public class Playing implements Screen {
         ScreenUtils.clear(255, 255, 255, 0);
         game.batch.begin();
         player.draw();
+        player.getAnimator().render((int) player.position.x, (int) player.position.y);
         game.batch.end();
     }
 
@@ -60,6 +61,7 @@ public class Playing implements Screen {
 
     @Override
     public void dispose() {
+        player.getAnimator().dispose();
         game.dispose();
     }
 
