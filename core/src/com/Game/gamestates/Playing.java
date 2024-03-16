@@ -41,7 +41,7 @@ public class Playing implements Screen {
         game.batch.begin();
         player.draw();
         for (Enemy enemy: enemies){
-            enemy.draw();
+            enemy.draw(player.position);
         }
         player.getAnimator().render((int) player.position.x, (int) player.position.y);
         game.batch.end();

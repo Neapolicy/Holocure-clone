@@ -12,7 +12,10 @@ public class Enemy extends Entity{
         sprite.setScale(.1f);
         this.playerPos = playerPos;
     }
-    public void followPlayer(float deltatime) {
+    public void followPlayer(float deltatime, Vector2 playerPos) {
+        // Update player position (you might want to do this elsewhere)
+        playerPos = new Vector2(playerPos.x, playerPos.y);
+
         // Calculate direction vector
         Vector2 direction = new Vector2(playerPos.x - position.x, playerPos.y - position.y);
         direction.nor(); // Normalize the direction vector
@@ -22,8 +25,8 @@ public class Enemy extends Entity{
         position.x += direction.x * speed * deltatime;
         position.y += direction.y * speed * deltatime;
     }
-    public void draw(){
-        followPlayer(Gdx.graphics.getDeltaTime());
+    public void draw(Vector2 playerPos){
+        followPlayer(Gdx.graphics.getDeltaTime(), playerPos);
         sprite.setPosition(position.x, position.y);
         sprite.draw(screen.getGame().batch);
     }
