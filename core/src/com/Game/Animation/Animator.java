@@ -42,7 +42,7 @@ public class Animator{
         }
 
         // Initialize the Animation with the frame interval and array of frames
-        walkAnimation = new Animation<TextureRegion>(0.025f, walkFrames);
+        walkAnimation = new Animation<TextureRegion>(0.12f, walkFrames);
 
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0

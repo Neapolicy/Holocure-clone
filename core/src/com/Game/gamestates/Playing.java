@@ -55,9 +55,9 @@ public class Playing implements Screen {
         game.batch.begin();
         getTime();
         player.draw();
-        for (Enemy enemy: enemies){
-            enemy.draw(player.position);
-        }
+//        for (Enemy enemy: enemies){
+//            enemy.draw(player.position);
+//        }
         game.batch.end();
     }
 

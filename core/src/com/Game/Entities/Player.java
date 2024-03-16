@@ -10,10 +10,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity{
     private Animator animator = new Animator();
+    private boolean moving;
     public Player(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
         sprite.setSize((float) (.1 * sprite.getWidth()), (float) (.1 * sprite.getHeight()));
-        animator.createAnimation("Sprites/sprite_sheet_walk.png");
+        animator.createAnimation("Sprites/player_idle.png");
     }
     public void update(float deltatime) {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
@@ -27,8 +28,8 @@ public class Player extends Entity{
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             position.x += speed * deltatime;
-            animator.render((int) position.x, (int) position.y);
         }
+        animator.render((int) position.x, (int) position.y);
     }
     public void draw(){
         update(Gdx.graphics.getDeltaTime());
