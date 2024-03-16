@@ -12,8 +12,7 @@ public class Player extends Entity{
     private Animator animator = new Animator();
     public Player(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
-        sprite.setScale(.1f);
-        sprite.setOrigin(0, 0);
+        sprite.setSize((float) (.1 * sprite.getWidth()), (float) (.1 * sprite.getHeight()));
         animator.createAnimation("Sprites/sprite_sheet_walk.png");
     }
     public void update(float deltatime) {

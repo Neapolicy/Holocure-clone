@@ -6,11 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Enemy extends Entity{
-    private Vector2 playerPos;
-    public Enemy(int speed, Texture text, int x, int y, Vector2 playerPos, Playing screen) {
+    public Enemy(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
-        sprite.setScale(.1f);
-        this.playerPos = playerPos;
+        sprite.setSize((float) (.1 * sprite.getWidth()), (float) (.1 * sprite.getHeight()));
     }
     public void followPlayer(float deltatime, Vector2 playerPos) {
         // Update player position (you might want to do this elsewhere)
