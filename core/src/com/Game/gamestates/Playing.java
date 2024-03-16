@@ -27,7 +27,7 @@ public class Playing implements Screen {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
-        player = new Player(500, new Texture("Sprites/bullet.png"), 0, 0, this);
+        player = new Player(500, new Texture("Sprites/player_idle.png"), 0, 0, this);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, this));
         game.font.setColor(Color.CYAN);
         game.font.getData().setScale(5f);

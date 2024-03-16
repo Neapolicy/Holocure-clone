@@ -18,7 +18,7 @@ public class Menu implements Screen {
     public Menu(myGdxGame game){
         this.game = game;
         musicMan();
-        animator.createAnimation("Sprites/sprite_sheet_walk.png");
+        animator.createAnimation("Sprites/player_run.png"); //make sure that it matches
     }
     public void musicMan(){
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/menu_music.wav"));
@@ -47,7 +47,7 @@ public class Menu implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
         game.batch.begin();
-        animator.render(0, 0);
+        animator.render(100, 100);
         controls();
         update();
         game.batch.end();

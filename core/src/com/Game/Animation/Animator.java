@@ -9,15 +9,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animator{
     // Constant rows and columns of the sprite sheet
-    private static final int FRAME_COLS = 6, FRAME_ROWS = 5;
+    private int FRAME_COLS = 6, FRAME_ROWS = 1;
 
     // Objects used
-    Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
-    Texture walkSheet;
-    SpriteBatch spriteBatch;
+    private Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
+    private Texture walkSheet;
+    private SpriteBatch spriteBatch;
 
     // A variable for tracking elapsed time for the animation
-    float stateTime;
+    private float stateTime;
 
     public void createAnimation(String s) {
 
@@ -48,6 +48,10 @@ public class Animator{
         // time to 0
         spriteBatch = new SpriteBatch();
         stateTime = 0f;
+    }
+    public void changeColnRows(int col, int row){
+        FRAME_COLS = col;
+        FRAME_ROWS = row;
     }
 
     public void render(int x, int y) {
