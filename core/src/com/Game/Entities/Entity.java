@@ -20,7 +20,4 @@ public class Entity {
         position = new Vector2(x, y);
         this.screen = screen;
     }
-    public Vector2 getPosition(){
-        return position;
-    }
 }

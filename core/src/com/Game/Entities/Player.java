@@ -13,6 +13,7 @@ public class Player extends Entity{
     public Player(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.1f);
+        sprite.setOrigin(0, 0);
         animator.createAnimation("Sprites/sprite_sheet_walk.png");
     }
     public void update(float deltatime) {

@@ -1,5 +1,6 @@
 package com.Game.gamestates;
 
+import com.Game.Entities.Enemy;
 import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
@@ -8,13 +9,17 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.ArrayList;
+
 public class Playing implements Screen {
     private Music bgm;
     private myGdxGame game;
     private Player player;
+    private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
         player = new Player(500, new Texture("Sprites/bullet.png"), 0, 0, this);
+        enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, player.position, this));
         musicMan();
     }
 
@@ -35,6 +40,9 @@ public class Playing implements Screen {
         ScreenUtils.clear(255, 255, 255, 0);
         game.batch.begin();
         player.draw();
+        for (Enemy enemy: enemies){
+            enemy.draw();
+        }
         player.getAnimator().render((int) player.position.x, (int) player.position.y);
         game.batch.end();
     }
