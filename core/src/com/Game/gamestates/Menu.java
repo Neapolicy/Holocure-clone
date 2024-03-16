@@ -14,10 +14,18 @@ public class Menu implements Screen {
     private Animator animator = new Animator();
     public Menu(myGdxGame game){
         this.game = game;
+        musicMan();
         animator.createAnimation("Sprites/sprite_sheet_walk.png");
+    }
+    public void musicMan(){
+        bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/menu_music.wav"));
+        bgm.setVolume(.5f);
+        bgm.setLooping(true);
+        bgm.play();
     }
     public void update(){
         if (Gdx.input.isButtonJustPressed(0)){
+            bgm.stop();
             game.setScreen(new Playing(game));
         }
     }
@@ -59,6 +67,7 @@ public class Menu implements Screen {
     @Override
     public void dispose() {
         animator.dispose();
+        bgm.dispose();
         game.dispose();
     }
 }
