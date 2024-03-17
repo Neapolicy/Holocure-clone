@@ -19,10 +19,10 @@ public class Animator{
     // A variable for tracking elapsed time for the animation
     private float stateTime;
 
-    public void createAnimation(String s) {
+    public void createAnimation(Texture walkSheet) {
 
         // Load the sprite sheet as a Texture
-        walkSheet = new Texture(Gdx.files.internal(s));
+        this.walkSheet = walkSheet;
 
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are

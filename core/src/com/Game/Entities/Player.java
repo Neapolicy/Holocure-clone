@@ -15,7 +15,7 @@ public class Player extends Entity{
         sprite.setScale(.01f);
         sprite.setSize((float) (.1 * sprite.getWidth()), (float) (.1 * sprite.getHeight()));
         animator.changeColnRows(5, 1);
-        animator.createAnimation("Sprites/player_idle.png");
+        animator.createAnimation(new Texture("Sprites/player_idle.png"));
     }
     public void update(float deltatime) {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
@@ -46,7 +46,7 @@ public class Player extends Entity{
     public void playerRun() {
         if (!isRunning) {
             animator.changeColnRows(6, 1);
-            animator.createAnimation("Sprites/player_run.png");
+            animator.createAnimation(new Texture("Sprites/player_run.png"));
             isRunning = true; // Set the flag to true
         }
     }
@@ -54,7 +54,7 @@ public class Player extends Entity{
     public void playerIdle() {
         if (!isIdle) {
             animator.changeColnRows(5, 1);
-            animator.createAnimation("Sprites/player_idle.png");
+            animator.createAnimation(new Texture("Sprites/player_idle.png"));
             isIdle = true; // Set the flag to true
         }
     }
