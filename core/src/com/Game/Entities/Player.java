@@ -5,8 +5,6 @@ import com.Game.gamestates.Playing;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Entity{
     private Animator animator = new Animator();
@@ -35,17 +33,11 @@ public class Player extends Entity{
             position.x += speed * deltatime;
             moving = true;
         }
-        else{
+        else {
             moving = false;
         }
-        if (moving){
-            playerRun();
-        }
-        else{
-            playerIdle();
-        }
     }
-    public void playerRun(){
+    public void playerRun(){ //the issue is that it keeps calling these methods when i really only need to call it once
         animator.createAnimation("Sprites/player_run.png");
         animator.changeColnRows(6, 1);
     }
@@ -55,9 +47,9 @@ public class Player extends Entity{
     }
     public void draw(){
         update(Gdx.graphics.getDeltaTime());
+        animator.render((int) position.x, (int) position.y);
         sprite.setPosition(position.x, position.y);
         sprite.draw(screen.getGame().batch);
-        animator.render((int) position.x, (int) position.y);
     }
     public Animator getAnimator(){
         return animator;
