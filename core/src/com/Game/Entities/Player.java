@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Player extends Entity{
     private Animator animator = new Animator();
-    private boolean moving;
+    private boolean isRunning = false;
+    private boolean isIdle = false;
     public Player(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.01f);
@@ -19,31 +20,43 @@ public class Player extends Entity{
     public void update(float deltatime) {
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             position.y += speed * deltatime;
-            moving = true;
+            playerRun();
+            isIdle = false;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             position.x -= speed * deltatime;
-            moving = true;
+            playerRun();
+            isIdle = false;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             position.y -= speed * deltatime;
-            moving = true;
+            playerRun();
+            isIdle = false;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             position.x += speed * deltatime;
-            moving = true;
+            playerRun();
+            isIdle = false;
         }
-        else {
-            moving = false;
+        else{
+            playerIdle();
+            isRunning = false;
         }
     }
-    public void playerRun(){ //the issue is that it keeps calling these methods when i really only need to call it once
-        animator.createAnimation("Sprites/player_run.png");
-        animator.changeColnRows(6, 1);
+    public void playerRun() {
+        if (!isRunning) {
+            animator.changeColnRows(6, 1);
+            animator.createAnimation("Sprites/player_run.png");
+            isRunning = true; // Set the flag to true
+        }
     }
-    public void playerIdle(){
-        animator.createAnimation("Sprites/player_idle.png");
-        animator.changeColnRows(5, 1);
+
+    public void playerIdle() {
+        if (!isIdle) {
+            animator.changeColnRows(5, 1);
+            animator.createAnimation("Sprites/player_idle.png");
+            isIdle = true; // Set the flag to true
+        }
     }
     public void draw(){
         update(Gdx.graphics.getDeltaTime());
