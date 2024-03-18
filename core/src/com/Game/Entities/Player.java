@@ -1,16 +1,19 @@
 package com.Game.Entities;
 
 import com.Game.Animation.Animator;
+import com.Game.Objects.Weapon;
 import com.Game.gamestates.Playing;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends Entity {
     private Animator animator = new Animator();
     private boolean isRunning = false;
     private boolean isIdle = false;
     private boolean left = false;
+    private Weapon weapon = new Weapon(new Texture("Sprites/slash_effect"), 1000, 1000);
 
     public Player(int speed, Texture text, int x, int y, Playing screen) {
         super(speed, text, x, y, screen);
@@ -81,5 +84,9 @@ public class Player extends Entity {
 
     public Animator getAnimator() {
         return animator;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
     }
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,16 +22,18 @@ public class Playing implements Screen {
     private Music bgm;
     private myGdxGame game;
     private Player player;
-    private boolean paused;
-    private float timePassed = 0; // 5 minutes in seconds
+    private OrthographicCamera camera = new OrthographicCamera();
+    public static float timePassed = 0; // 5 minutes in seconds
     private String timerText;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
-        player = new Player(500, new Texture("Sprites/player_idle.png"), 0, 0, this);
+        player = new Player(500, new Texture("Sprites/player_idle.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, this);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, this));
         game.font.setColor(Color.CYAN);
         game.font.getData().setScale(5f);
+        camera.setToOrtho(false, 100, 100);
+        camera.zoom += 10f;
 //        musicMan();
     }
 
@@ -53,6 +56,9 @@ public class Playing implements Screen {
         ScreenUtils.clear(255, 255, 255, 0);
         controls();
         game.batch.begin();
+
+        camera.position.set(player.sprite.getX(), player.sprite.getY(), 0);
+        camera.update();
         getTime();
         player.draw();
 //        for (Enemy enemy: enemies){
@@ -94,6 +100,7 @@ public class Playing implements Screen {
     @Override
     public void dispose() {
         player.getAnimator().dispose();
+        player.getWeapon().dispose();
         game.font.dispose();
         game.dispose();
     }

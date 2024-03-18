@@ -14,6 +14,7 @@ public class Menu implements Screen {
     private Music bgm;
     private myGdxGame game;
     private Animator animator = new Animator();
+    private Animator animatorTwo = new Animator();
 
     public Menu(myGdxGame game){
         this.game = game;
@@ -48,6 +49,7 @@ public class Menu implements Screen {
         ScreenUtils.clear(0, 0, 0, 1);
         game.batch.begin();
         animator.render(100, 100);
+//        animatorTwo.render(300, 300);
         controls();
         update();
         game.batch.end();
@@ -76,6 +78,7 @@ public class Menu implements Screen {
     @Override
     public void dispose() {
         animator.dispose();
+        animatorTwo.dispose();
         bgm.dispose();
         game.dispose();
     }
