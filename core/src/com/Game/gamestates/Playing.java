@@ -12,26 +12,27 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static com.Game.gamestates.Menu.controls;
 
 public class Playing implements Screen {
+    public static Texture backgroundTexture = new Texture("Backgrounds/playing_bg.png");
     private Music bgm;
     private myGdxGame game;
     private Player player;
     private OrthographicCamera camera = new OrthographicCamera();
     public static float timePassed = 0; // 5 minutes in seconds
-    private String timerText;
+    private Texture timerText;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
-        player = new Player(500, new Texture("Sprites/player_idle.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, this);
-        enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, this));
-        game.font.setColor(Color.CYAN);
-        game.font.getData().setScale(5f);
+        player = new Player(500, new Texture("Sprites/player_idle.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+        enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
         camera.setToOrtho(false, 100, 100);
         camera.zoom += 10f;
 //        musicMan();
@@ -51,15 +52,12 @@ public class Playing implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        ScreenUtils.clear(255, 255, 255, 0);
         controls();
         game.batch.begin();
-
-        camera.position.set(player.sprite.getX(), player.sprite.getY(), 0);
-        camera.update();
-        getTime();
+//        camera.position.set(player.sprite.getX(), player.sprite.getY(), 0);
+//        camera.update();
+//        getTime();
+        game.batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         player.draw();
 //        for (Enemy enemy: enemies){
 //            enemy.draw(player.position);
@@ -72,9 +70,9 @@ public class Playing implements Screen {
         timePassed += deltaTime;
         int minutes = (int) (timePassed / 60);
         int seconds = (int) (timePassed % 60);
+        timerText = new Texture(String.format("%02d:%02d", minutes, seconds));
         // Display the timer
-        timerText = String.format("%02d:%02d", minutes, seconds);
-        game.font.draw(game.batch, timerText, (float) Gdx.graphics.getWidth() / 2 - 50, Gdx.graphics.getHeight());
+        game.batch.draw(timerText, 100, 100);
     }
 
     @Override
@@ -101,6 +99,7 @@ public class Playing implements Screen {
     public void dispose() {
         player.getAnimator().dispose();
         player.getWeapon().dispose();
+        backgroundTexture.dispose();
         game.font.dispose();
         game.dispose();
     }

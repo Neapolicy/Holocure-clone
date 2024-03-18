@@ -3,6 +3,7 @@ package com.Game.Entities;
 import com.Game.Animation.Animator;
 import com.Game.Objects.Weapon;
 import com.Game.gamestates.Playing;
+import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,9 +14,9 @@ public class Player extends Entity {
     private boolean isRunning = false;
     private boolean isIdle = false;
     private boolean left = false;
-    private Weapon weapon = new Weapon(new Texture("Sprites/slash_effect"), 1000, 1000);
+    private Weapon weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000);
 
-    public Player(int speed, Texture text, int x, int y, Playing screen) {
+    public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.01f);
     }
@@ -75,11 +76,11 @@ public class Player extends Entity {
         }
     }
 
-    public void draw() {
+    public void draw() { //https://www.youtube.com/watch?v=gSdJXHh3gsA watch this
         update(Gdx.graphics.getDeltaTime());
         animator.render((int) position.x, (int) position.y);
         sprite.setPosition(position.x, position.y);
-        sprite.draw(screen.getGame().batch);
+        screen.batch.draw(texture, position.x, position.y); //replace with texture lmao
     }
 
     public Animator getAnimator() {

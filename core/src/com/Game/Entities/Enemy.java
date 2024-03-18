@@ -1,12 +1,13 @@
 package com.Game.Entities;
 
 import com.Game.gamestates.Playing;
+import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Enemy extends Entity{
-    public Enemy(int speed, Texture text, int x, int y, Playing screen) {
+    public Enemy(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setSize((float) (.1 * sprite.getWidth()), (float) (.1 * sprite.getHeight()));
     }
@@ -26,6 +27,6 @@ public class Enemy extends Entity{
     public void draw(Vector2 playerPos){
         followPlayer(Gdx.graphics.getDeltaTime(), playerPos);
         sprite.setPosition(position.x, position.y);
-        sprite.draw(screen.getGame().batch);
+        screen.batch.draw(texture, position.x, position.y);
     }
 }

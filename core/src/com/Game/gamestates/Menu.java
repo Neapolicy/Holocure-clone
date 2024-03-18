@@ -46,7 +46,6 @@ public class Menu implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0, 1);
         game.batch.begin();
         animator.render(100, 100);
 //        animatorTwo.render(300, 300);
