@@ -76,7 +76,7 @@ public class Player extends Entity {
         }
     }
 
-    public void draw() { //https://www.youtube.com/watch?v=gSdJXHh3gsA watch this
+    public void draw() { //https://www.youtube.com/watch?v=1fJrhgc0RRw&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=11 watch this
         update(Gdx.graphics.getDeltaTime());
         animator.render((int) position.x, (int) position.y);
         sprite.setPosition(position.x, position.y);
