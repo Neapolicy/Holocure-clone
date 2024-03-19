@@ -29,13 +29,15 @@ public class Playing implements Screen {
     private OrthographicCamera camera = new OrthographicCamera();
     private ExtendViewport viewport;
     public static float timePassed = 0; // 5 minutes in seconds
-    private Texture timerText;
+    private String timerText;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
         player = new Player(500, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        game.font12.setColor(Color.BLACK);
+        game.font12.getData().setScale(5f);
 //        musicMan();
     }
 
@@ -60,10 +62,10 @@ public class Playing implements Screen {
         camera.position.set(player.sprite.getX() / 2, player.sprite.getY() / 2, 0);
         camera.update();
 
-        game.batch.setProjectionMatrix(camera.combined);
-//        getTime();
+//        game.batch.setProjectionMatrix(camera.combined);
         game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         player.draw();
+        getTime();
 //        for (Enemy enemy: enemies){
 //            enemy.draw(player.position);
 //        }
@@ -75,9 +77,9 @@ public class Playing implements Screen {
         timePassed += deltaTime;
         int minutes = (int) (timePassed / 60);
         int seconds = (int) (timePassed % 60);
-        timerText = new Texture(String.format("%02d:%02d", minutes, seconds));
+        timerText = String.format("%02d:%02d", minutes, seconds);
         // Display the timer
-        game.batch.draw(timerText, 100, 100);
+        game.font12.draw(game.batch, timerText, (float) Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
     }
 
     @Override
@@ -106,7 +108,7 @@ public class Playing implements Screen {
         player.getAnimator().dispose();
         player.getWeapon().dispose();
         backgroundTexture.dispose();
-        game.font.dispose();
+        game.font12.dispose();
         game.dispose();
     }
 
