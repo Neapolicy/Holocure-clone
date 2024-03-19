@@ -1,5 +1,6 @@
 package com.Game.Animation;
 
+import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Animator{
     // Constant rows and columns of the sprite sheet
     private int FRAME_COLS = 6, FRAME_ROWS = 1;
+    private myGdxGame game;
 
     // Objects used
     private Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
@@ -19,10 +21,11 @@ public class Animator{
     // A variable for tracking elapsed time for the animation
     private float stateTime;
 
-    public void createAnimation(Texture walkSheet) {
+    public void createAnimation(Texture walkSheet, myGdxGame game) {
 
         // Load the sprite sheet as a Texture
         this.walkSheet = walkSheet;
+        this.game = game;
 
         // Use the split utility method to create a 2D array of TextureRegions. This is
         // possible because this sprite sheet contains frames of equal size and they are
@@ -60,9 +63,7 @@ public class Animator{
 
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-        spriteBatch.begin();
-        spriteBatch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
-        spriteBatch.end();
+        game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
     }
 
     public void dispose() { // SpriteBatches and Textures must always be disposed

@@ -14,11 +14,12 @@ public class Player extends Entity {
     private boolean isRunning = false;
     private boolean isIdle = false;
     private boolean left = false;
-    private Weapon weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000);
+    private Weapon weapon;
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.01f);
+        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000, screen);
     }
 
     public void update(float deltatime) {
@@ -57,9 +58,9 @@ public class Player extends Entity {
     public void playerRun() {
         if (!isRunning) {
             animator.changeColnRows(6, 1);
-            if (!left) animator.createAnimation(new Texture("Sprites/player_run.png"));
+            if (!left) animator.createAnimation(new Texture("Sprites/player_run.png"), screen);
             else {
-                animator.createAnimation(new Texture("Sprites/player_run_left.png"));
+                animator.createAnimation(new Texture("Sprites/player_run_left.png"), screen);
             }
             isRunning = true; // Set the flag to true
         }
@@ -68,19 +69,17 @@ public class Player extends Entity {
     public void playerIdle() {
         if (!isIdle) {
             animator.changeColnRows(5, 1);
-            if (!left) animator.createAnimation(new Texture("Sprites/player_idle.png"));
+            if (!left) animator.createAnimation(new Texture("Sprites/player_idle.png"), screen);
             else {
-                animator.createAnimation(new Texture("Sprites/player_idle_left.png"));
+                animator.createAnimation(new Texture("Sprites/player_idle_left.png"), screen);
             }
             isIdle = true; // Set the flag to true
         }
     }
 
     public void draw() { //https://www.youtube.com/watch?v=1fJrhgc0RRw&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=11 watch this
-        update(Gdx.graphics.getDeltaTime());
+        update(Gdx.graphics.getDeltaTime()); //does movement
         animator.render((int) position.x, (int) position.y);
-        sprite.setPosition(position.x, position.y);
-        screen.batch.draw(texture, position.x, position.y); //replace with texture lmao
     }
 
     public Animator getAnimator() {

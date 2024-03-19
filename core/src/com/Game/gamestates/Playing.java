@@ -31,7 +31,7 @@ public class Playing implements Screen {
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){
         this.game = game;
-        player = new Player(500, new Texture("Sprites/player_idle.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+        player = new Player(500, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
         camera.setToOrtho(false, 100, 100);
         camera.zoom += 10f;
@@ -53,6 +53,7 @@ public class Playing implements Screen {
     @Override
     public void render(float delta) {
         controls();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 //        camera.position.set(player.sprite.getX(), player.sprite.getY(), 0);
 //        camera.update();

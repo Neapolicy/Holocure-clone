@@ -19,7 +19,7 @@ public class Menu implements Screen {
     public Menu(myGdxGame game){
         this.game = game;
         musicMan();
-        animator.createAnimation(new Texture("Sprites/player_run.png")); //make sure that it matches
+        animator.createAnimation(new Texture("Sprites/player_run.png"), game); //make sure that it matches
     }
     public void musicMan(){
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/menu_music.wav"));

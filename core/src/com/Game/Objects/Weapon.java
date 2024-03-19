@@ -2,6 +2,7 @@ package com.Game.Objects;
 
 import com.Game.Animation.Animator;
 import com.Game.Entities.Player;
+import com.Game.myGdxGame;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -11,11 +12,13 @@ public class Weapon {
     public Sprite sprite;
     public Vector2 position;
     public Animator animator = new Animator();
-    public Weapon(Texture text, int x, int y){
+    public myGdxGame game;
+    public Weapon(Texture text, int x, int y, myGdxGame game){
+        this.game = game;
         texture = text;
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
-        animator.createAnimation(text);
+        animator.createAnimation(text, game);
     }
 
     public void attack(int time, int cd, Player player){

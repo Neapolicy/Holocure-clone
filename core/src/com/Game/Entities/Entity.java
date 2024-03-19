@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.awt.geom.Rectangle2D;
 
-public class Entity {
+public class Entity extends Sprite {
     public int speed;
     public Sprite sprite;
     public Vector2 position;
