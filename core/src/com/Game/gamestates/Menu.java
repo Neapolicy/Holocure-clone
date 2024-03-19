@@ -1,14 +1,12 @@
 package com.Game.gamestates;
 
-import com.Game.Animation.Animator;
+import com.Game.Utils.Animator;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Menu implements Screen {
     private Music bgm;
@@ -20,6 +18,7 @@ public class Menu implements Screen {
         this.game = game;
         musicMan();
         animator.createAnimation(new Texture("Sprites/player_run.png"), game); //make sure that it matches
+        animatorTwo.createAnimation(new Texture("Effects/slash_effect.png"), game);
     }
     public void musicMan(){
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/menu_music.wav"));
@@ -48,7 +47,7 @@ public class Menu implements Screen {
     public void render(float delta) {
         game.batch.begin();
         animator.render(100, 100);
-//        animatorTwo.render(300, 300);
+        animatorTwo.render(300, 300);
         controls();
         update();
         game.batch.end();

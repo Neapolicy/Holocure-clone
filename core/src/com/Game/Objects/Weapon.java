@@ -1,6 +1,6 @@
 package com.Game.Objects;
 
-import com.Game.Animation.Animator;
+import com.Game.Utils.Animator;
 import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.graphics.Texture;

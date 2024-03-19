@@ -1,13 +1,11 @@
 package com.Game.Entities;
 
-import com.Game.Animation.Animator;
+import com.Game.Utils.Animator;
 import com.Game.Objects.Weapon;
-import com.Game.gamestates.Playing;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 
 public class Player extends Entity {
     private Animator animator = new Animator();

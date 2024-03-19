@@ -1,4 +1,4 @@
-package com.Game.Animation;
+package com.Game.Utils;
 
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;

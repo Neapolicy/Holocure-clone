@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Playing implements Screen {
     private myGdxGame game;
     private Player player;
     private OrthographicCamera camera = new OrthographicCamera();
+    private ExtendViewport viewport;
     public static float timePassed = 0; // 5 minutes in seconds
     private Texture timerText;
     private ArrayList<Enemy> enemies = new ArrayList<>();
@@ -33,8 +35,7 @@ public class Playing implements Screen {
         this.game = game;
         player = new Player(500, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
-        camera.setToOrtho(false, 100, 100);
-        camera.zoom += 10f;
+        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 //        musicMan();
     }
 
@@ -55,10 +56,13 @@ public class Playing implements Screen {
         controls();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-//        camera.position.set(player.sprite.getX(), player.sprite.getY(), 0);
-//        camera.update();
+
+        camera.position.set(player.sprite.getX() / 2, player.sprite.getY() / 2, 0);
+        camera.update();
+
+        game.batch.setProjectionMatrix(camera.combined);
 //        getTime();
-        game.batch.draw(backgroundTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         player.draw();
 //        for (Enemy enemy: enemies){
 //            enemy.draw(player.position);
@@ -78,7 +82,8 @@ public class Playing implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        viewport.update(width, height);
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
     }
 
     @Override
