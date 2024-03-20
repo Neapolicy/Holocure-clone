@@ -37,7 +37,6 @@ public class Playing implements Screen {
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         game.font24.setColor(Color.BLACK);
-        game.font24.getData().setScale(5f, 5f);
 //        musicMan();
     }
 
@@ -79,7 +78,7 @@ public class Playing implements Screen {
         int seconds = (int) (timePassed % 60);
         timerText = String.format("%02d:%02d", minutes, seconds);
         // Display the timer
-        game.font24.draw(game.batch, timerText, (float) Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
+        game.font24.draw(game.batch, timerText, (float) Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight());
     }
 
     @Override

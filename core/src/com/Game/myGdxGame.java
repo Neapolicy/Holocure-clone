@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 public class myGdxGame extends Game{
 	public SpriteBatch batch;
@@ -38,13 +39,11 @@ public class myGdxGame extends Game{
 	}
 	public void initFonts(){
 		try{
-			FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Archon.ttf"));
-			FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
-
-			params.size = 24;
-			params.color = Color.BLACK;
-			font24 = generator.generateFont(params);
-			generator.dispose();
+			FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Adequate.ttf"));
+			FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+			parameter.size = 48; // font size
+			font24 = generator.generateFont(parameter);
+			generator.dispose(); // avoid memory leaks, important
 		} catch (Exception e) {
 			System.out.println("no");
         }
