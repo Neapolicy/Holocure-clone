@@ -11,7 +11,7 @@ public class DesktopLauncher { //desktop, don't touch unless you want to change 
 	public static void main (String[] arg) { //the whole idea of the game is that you're a girl at an anime con LMAO, and now u fight off ppl ig
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("Holocure Made In China");
+		config.setTitle("Holocure Made In China"); //make sure that the font rendering is only occuring in the render method
 
 		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		new Lwjgl3Application(new myGdxGame(), config);
