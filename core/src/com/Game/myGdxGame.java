@@ -5,23 +5,23 @@ import com.Game.Utils.Animator;
 import com.Game.gamestates.Menu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class myGdxGame extends Game{
 	public SpriteBatch batch;
-	public BitmapFont font12;
+	public BitmapFont font24;
 	public Animator animator;
-	public FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/myfont.ttf")); //something to do with the fonts/myfonts
-	public FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
 
 	@Override
 	public void create () {
 		animator = new Animator();
 		batch = new SpriteBatch();
-//		font12 = generator.generateFont(parameter);;
-		font12 = new BitmapFont();
+
+		initFonts();
+
 		setScreen(new Menu(this));
 	}
 
@@ -34,7 +34,19 @@ public class myGdxGame extends Game{
 	public void dispose () {
 		super.dispose();
 		batch.dispose();
-		font12.dispose();
-//		generator.dispose();
+		font24.dispose();
 	}
+	public void initFonts(){
+		try{
+			FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/Archon.ttf"));
+			FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+
+			params.size = 24;
+			params.color = Color.BLACK;
+			font24 = generator.generateFont(params);
+			generator.dispose();
+		} catch (Exception e) {
+			System.out.println("no");
+        }
+    }
 }
