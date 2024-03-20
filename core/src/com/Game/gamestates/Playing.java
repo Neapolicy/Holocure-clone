@@ -2,6 +2,7 @@ package com.Game.gamestates;
 
 import com.Game.Entities.Enemy;
 import com.Game.Entities.Player;
+import com.Game.Utils.CameraStyles;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,13 +11,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 import static com.Game.gamestates.Menu.controls;
@@ -37,6 +34,7 @@ public class Playing implements Screen {
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         game.font24.setColor(Color.BLACK);
+        camera.setToOrtho(false, 720, 480);
 //        musicMan();
     }
 
@@ -58,17 +56,22 @@ public class Playing implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
 
-        camera.position.set(player.sprite.getX() / 2, player.sprite.getY() / 2, 0);
-        camera.update();
+        cameraUpdate();
 
 //        game.batch.setProjectionMatrix(camera.combined);
         game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         player.draw();
         getTime();
+
 //        for (Enemy enemy: enemies){
 //            enemy.draw(player.position);
 //        }
+        cameraUpdate();
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.end();
+    }
+    public void cameraUpdate(){
+        CameraStyles.lockOnTarget(camera, player.position);
     }
 
     public void getTime(){
