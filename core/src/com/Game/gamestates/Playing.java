@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     public void render(float delta) {
         controls();
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        ScreenUtils.clear(Color.GREEN);
         game.batch.begin();
 
         cameraUpdate();
@@ -79,7 +81,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         int seconds = (int) (timePassed % 60);
         timerText = String.format("%02d:%02d", minutes, seconds);
         // Display the timer
-        game.font24.draw(game.batch, timerText, (float) Gdx.graphics.getWidth() / 2 - 100, Gdx.graphics.getHeight());
+        game.font24.draw(game.batch, timerText, player.position.x - 100, player.position.y + 500);
     }
 
     @Override
