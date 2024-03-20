@@ -11,14 +11,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 import java.util.ArrayList;
 
 import static com.Game.gamestates.Menu.controls;
 
-public class Playing implements Screen {
+public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ5lBgCY by connor the goat
     public static Texture backgroundTexture = new Texture("Backgrounds/playing_bg.png");
     private Music bgm;
     private myGdxGame game;
@@ -58,7 +57,6 @@ public class Playing implements Screen {
 
         cameraUpdate();
 
-//        game.batch.setProjectionMatrix(camera.combined);
         game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         player.draw();
         getTime();
