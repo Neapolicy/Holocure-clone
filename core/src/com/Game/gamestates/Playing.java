@@ -50,8 +50,8 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
     public void createMap(){
         maploader = new TmxMapLoader();
-//        map = new TmxMapLoader().load("Backgrounds/level1.tmx");
-//        renderer = new OrthogonalTiledMapRenderer(map);
+        map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
     }
 
     public void musicMan(){
@@ -71,7 +71,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         controls();
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-//        renderer.render();
+        renderer.render();
         ScreenUtils.clear(Color.GREEN);
         viewport.apply();
 
