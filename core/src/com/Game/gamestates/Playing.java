@@ -8,6 +8,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -25,6 +28,9 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private ExtendViewport viewport;
     public static float timePassed = 0;
     private String timerText;
+    private TiledMap map;
+    private TmxMapLoader maploader;
+    private OrthogonalTiledMapRenderer renderer;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
         this.game = game;           //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
@@ -34,6 +40,11 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         game.font24.setColor(Color.BLACK);
         camera.setToOrtho(false, 720, 480);
 //        musicMan();
+    }
+    public void createMap(){
+        maploader = new TmxMapLoader();
+        map = maploader.load("level1.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map);
     }
 
     public void musicMan(){
@@ -53,6 +64,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         controls();
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        renderer.render();
         ScreenUtils.clear(Color.GREEN);
         viewport.apply();
 
