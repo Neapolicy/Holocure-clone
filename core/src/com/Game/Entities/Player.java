@@ -63,7 +63,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void playerRun() {
         if (!isRunning) {
             animator.changeColnRows(6, 1);
-            if (!left) animator.createAnimation(new Texture("Sprites/player_run.png"), screen);
+            animator.createAnimation(new Texture("Sprites/player_run.png"), screen);
             isRunning = true; // Set the flag to true
         }
     }
@@ -71,15 +71,14 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void playerIdle() {
         if (!isIdle) {
             animator.changeColnRows(5, 1);
-            if (!left) animator.createAnimation(new Texture("Sprites/player_idle.png"), screen);
+            animator.createAnimation(new Texture("Sprites/player_idle.png"), screen);
             isIdle = true; // Set the flag to true
         }
     }
 
     public void draw() { //https://www.youtube.com/watch?v=1fJrhgc0RRw&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=11 watch this
         update(Gdx.graphics.getDeltaTime()); //does movement
-        if (!left) animator.render((int) position.x, (int) position.y);
-        else animator.render((int) position.x, (int) position.y, true);
+        animator.render((int) position.x, (int) position.y);
     }
 
     public Animator getAnimator() {

@@ -1,5 +1,6 @@
 package com.Game.Utils;
 
+import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,6 +13,7 @@ public class Animator{
     // Constant rows and columns of the sprite sheet
     private int FRAME_COLS = 6, FRAME_ROWS = 1;
     private myGdxGame game;
+    private TextureRegion currentFrame;
 
     // Objects used
     private Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
@@ -56,18 +58,14 @@ public class Animator{
     public void render(int x, int y) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear screen
         stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+        currentFrame = walkAnimation.getKeyFrame(stateTime, true);
 
         // Get current frame of animation for the current stateTime
-        TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
-
-        game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
-    }
-    public void render(int x, int y, boolean left){
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear screen
-        stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
-
-        // Get current frame of animation for the current stateTime
-        TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+        if (Player.left && !currentFrame.isFlipX()) {
+            currentFrame.flip(true, false); // Flip horizontally
+        } else if (!Player.left && currentFrame.isFlipX()) {
+            currentFrame.flip(true, false); // Flip back to original
+        }
 
         game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
     }
