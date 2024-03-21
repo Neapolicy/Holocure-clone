@@ -2,10 +2,13 @@ package com.Game.Objects;
 
 import com.Game.Utils.Animator;
 import com.Game.Entities.Player;
+import com.Game.gamestates.Playing;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+
+import java.text.DecimalFormat;
 
 public class Weapon {
     public Texture texture;
@@ -21,10 +24,16 @@ public class Weapon {
         animator.createAnimation(text, game);
     }
 
-    public void attack(int time, int cd, Player player){
-        if (time % cd == 0){
-            updatePosition((int) player.position.x, (int) player.position.y);
-            animator.render((int) position.x, (int) position.y);
+    public void attack(float time, int cd, Player player){
+        if (time % cd > 0 && time % cd < .5){
+            if (player.getLeft()){
+                updatePosition((int) player.position.x, (int) player.position.y);
+                animator.render((int) position.x - 25, (int) position.y);
+            }
+            else{
+                updatePosition((int) player.position.x, (int) player.position.y);
+                animator.render((int) position.x + 50, (int) position.y);
+            }
         }
     }
 

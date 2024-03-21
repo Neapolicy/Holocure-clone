@@ -16,8 +16,6 @@ public class Animator{
     // Objects used
     private Animation<TextureRegion> walkAnimation; // Must declare frame type (TextureRegion)
     private Texture walkSheet;
-    private SpriteBatch spriteBatch;
-
     // A variable for tracking elapsed time for the animation
     private float stateTime;
 
@@ -45,11 +43,9 @@ public class Animator{
         }
 
         // Initialize the Animation with the frame interval and array of frames
-        walkAnimation = new Animation<TextureRegion>(0.12f, walkFrames);
-
+        walkAnimation = new Animation<>(0.12f, walkFrames);
         // Instantiate a SpriteBatch for drawing and reset the elapsed animation
         // time to 0
-        spriteBatch = new SpriteBatch();
         stateTime = 0f;
     }
     public void changeColnRows(int col, int row){
@@ -63,11 +59,20 @@ public class Animator{
 
         // Get current frame of animation for the current stateTime
         TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+
+        game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
+    }
+    public void render(int x, int y, boolean left){
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear screen
+        stateTime += Gdx.graphics.getDeltaTime(); // Accumulate elapsed animation time
+
+        // Get current frame of animation for the current stateTime
+        TextureRegion currentFrame = walkAnimation.getKeyFrame(stateTime, true);
+
         game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
     }
 
     public void dispose() { // SpriteBatches and Textures must always be disposed
-        spriteBatch.dispose();
         walkSheet.dispose();
     }
 }

@@ -2,22 +2,25 @@ package com.Game.Entities;
 
 import com.Game.Utils.Animator;
 import com.Game.Objects.Weapon;
+import com.Game.gamestates.Playing;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Player extends Entity {
+public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
     private Animator animator = new Animator();
     private boolean isRunning = false;
     private boolean isIdle = false;
-    private boolean left = false;
+    public static boolean left = false;
+    private int flip = -1;
     private Weapon weapon;
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.01f);
         weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000, screen);
+
     }
 
     public void update(float deltatime) {
@@ -51,15 +54,16 @@ public class Player extends Entity {
             playerIdle();
             isRunning = false; // Set running flag to false
         }
+        useWeapon();
+    }
+    public void useWeapon(){
+        weapon.attack(Playing.timePassed, 2, this);
     }
 
     public void playerRun() {
         if (!isRunning) {
             animator.changeColnRows(6, 1);
             if (!left) animator.createAnimation(new Texture("Sprites/player_run.png"), screen);
-            else {
-                animator.createAnimation(new Texture("Sprites/player_run_left.png"), screen);
-            }
             isRunning = true; // Set the flag to true
         }
     }
@@ -68,16 +72,14 @@ public class Player extends Entity {
         if (!isIdle) {
             animator.changeColnRows(5, 1);
             if (!left) animator.createAnimation(new Texture("Sprites/player_idle.png"), screen);
-            else {
-                animator.createAnimation(new Texture("Sprites/player_idle_left.png"), screen);
-            }
             isIdle = true; // Set the flag to true
         }
     }
 
     public void draw() { //https://www.youtube.com/watch?v=1fJrhgc0RRw&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=11 watch this
         update(Gdx.graphics.getDeltaTime()); //does movement
-        animator.render((int) position.x, (int) position.y);
+        if (!left) animator.render((int) position.x, (int) position.y);
+        else animator.render((int) position.x, (int) position.y, true);
     }
 
     public Animator getAnimator() {
@@ -86,5 +88,8 @@ public class Player extends Entity {
 
     public Weapon getWeapon() {
         return weapon;
+    }
+    public boolean getLeft(){
+        return left;
     }
 }
