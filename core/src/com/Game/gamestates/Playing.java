@@ -34,16 +34,23 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
         this.game = game;           //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
-        player = new Player(150, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
-        enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
+
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+
+        createMap();
+        initilizeEntities();
+
         game.font24.setColor(Color.BLACK);
         camera.setToOrtho(false, 720, 480);
 //        musicMan();
     }
+    public void initilizeEntities(){
+        player = new Player(150, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+        enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
+    }
     public void createMap(){
         maploader = new TmxMapLoader();
-        map = maploader.load("level1.tmx");
+        map = new TmxMapLoader().load("Backgrounds/level1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
     }
 
@@ -72,8 +79,9 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         cameraUpdate();
 
-        game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         player.draw();
+        //game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+
         getTime();
 
 //        for (Enemy enemy: enemies){
@@ -124,6 +132,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         backgroundTexture.dispose();
         game.font24.dispose();
         game.dispose();
+        map.dispose();
     }
 
     public myGdxGame getGame() {
