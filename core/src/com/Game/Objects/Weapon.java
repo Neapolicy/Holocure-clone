@@ -27,19 +27,12 @@ public class Weapon {
     public void attack(float time, int cd, Player player){
         if (time % cd > 0 && time % cd < .5){
             if (player.getLeft()){
-                updatePosition((int) player.position.x, (int) player.position.y);
-                animator.render((int) position.x - 25, (int) position.y);
+                animator.render((int) player.position.x - 25, (int) player.position.y);
             }
             else{
-                updatePosition((int) player.position.x, (int) player.position.y);
-                animator.render((int) position.x + 50, (int) position.y);
+                animator.render((int) player.position.x + 50, (int) player.position.y);
             }
         }
-    }
-
-    public void updatePosition(int x, int y){ //for like melee weapons, range isnt affected
-        position.x = x;
-        position.y = y;
     }
     public void dispose(){
         texture.dispose();

@@ -5,15 +5,19 @@ import com.Game.Entities.Player;
 import com.Game.Utils.CameraStyles;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
@@ -25,15 +29,14 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private myGdxGame game;
     private Player player;
     private OrthographicCamera camera;
-    private ExtendViewport viewport;
     public static float timePassed = 0;
     private String timerText;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+    private Viewport gamePort;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
-        this.game = game;
-         //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
+        this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
 
         initilizeEntities();
 
@@ -42,7 +45,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 //        musicMan();
     }
     public void initilizeEntities(){
-        player = new Player(150, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+        player = new Player(500, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
     }
 
@@ -58,34 +61,43 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
+        gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
     }
 
     @Override
     public void render(float delta) { //https://www.youtube.com/watch?v=zckxJn751Gw
         controls();
 
-        System.out.println(player.position.x);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         game.batch.begin();
-        renderer.setView(camera);
-        renderer.render();
 
         cameraUpdate();
 
         player.draw();
+
+        renderer.render();
 
         getTime();
 
 //        for (Enemy enemy: enemies){
 //            enemy.draw(player.position);
 //        }
-        game.batch.setProjectionMatrix(camera.combined);
         game.batch.end();
     }
     public void cameraUpdate(){
+        camera.update();
+        renderer.setView(camera);
         CameraStyles.lockOnTarget(camera, player.position);
+        game.batch.setProjectionMatrix(camera.combined);
+
+        float startX = camera.viewportWidth / 2;
+        float startY = camera.viewportHeight / 2;
+        MapProperties properties = map.getProperties();
+        float levelWidth = properties.get("width", Integer.class);
+        float levelHeight = properties.get("height", Integer.class);
+        CameraStyles.boundary(camera, startX, startY, levelWidth * 16 - startX * 2, levelHeight);
     }
 
     public void getTime(){
