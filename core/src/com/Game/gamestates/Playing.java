@@ -25,7 +25,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private myGdxGame game;
     private Player player;
     private OrthographicCamera camera;
-    private OrthographicCamera playerCamera;
     private ExtendViewport viewport;
     public static float timePassed = 0;
     private String timerText;
@@ -35,8 +34,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
         this.game = game;
          //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
-
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 
         initilizeEntities();
 
@@ -61,8 +58,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
-        playerCamera = new OrthographicCamera();
-        playerCamera.setToOrtho(false, 720, 480);
     }
 
     @Override
@@ -73,14 +68,11 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-//        viewport.apply();
-
         game.batch.begin();
-//        renderer.setView(camera);
-//        renderer.render();
+        renderer.setView(camera);
+        renderer.render();
 
         cameraUpdate();
-        game.batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
 
         player.draw();
 
@@ -89,11 +81,11 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 //        for (Enemy enemy: enemies){
 //            enemy.draw(player.position);
 //        }
-        game.batch.setProjectionMatrix(playerCamera.combined);
+        game.batch.setProjectionMatrix(camera.combined);
         game.batch.end();
     }
     public void cameraUpdate(){
-        CameraStyles.lockOnTarget(playerCamera, player.position);
+        CameraStyles.lockOnTarget(camera, player.position);
     }
 
     public void getTime(){
@@ -108,7 +100,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
     @Override
     public void resize(int width, int height) {
-//        viewport.update(width, height);
         camera.viewportWidth = width;
         camera.viewportHeight = height;
         camera.update();
