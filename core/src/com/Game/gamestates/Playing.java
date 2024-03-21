@@ -7,10 +7,8 @@ import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
@@ -25,12 +23,12 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private Player player;
     private OrthographicCamera camera = new OrthographicCamera();
     private ExtendViewport viewport;
-    public static float timePassed = 0; // 5 minutes in seconds
+    public static float timePassed = 0;
     private String timerText;
     private ArrayList<Enemy> enemies = new ArrayList<>();
-    public Playing(myGdxGame game){
-        this.game = game;
-        player = new Player(500, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+    public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
+        this.game = game;           //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
+        player = new Player(150, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
         viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         game.font24.setColor(Color.BLACK);
@@ -53,8 +51,11 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     @Override
     public void render(float delta) {
         controls();
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ScreenUtils.clear(Color.GREEN);
+        viewport.apply();
+
         game.batch.begin();
 
         cameraUpdate();
@@ -81,13 +82,12 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         int seconds = (int) (timePassed % 60);
         timerText = String.format("%02d:%02d", minutes, seconds);
         // Display the timer
-        game.font24.draw(game.batch, timerText, player.position.x - 100, player.position.y + 500);
+        game.font24.draw(game.batch, timerText, player.position.x - 50, player.position.y + 500);
     }
 
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
     }
 
     @Override

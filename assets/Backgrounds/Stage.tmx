@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="240" height="13" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="49">
+ <tileset firstgid="1" name="Background" tilewidth="16" tileheight="16" tilecount="7623" columns="99">
+  <grid orientation="orthogonal" width="8" height="8"/>
+  <image source="Downloads/PC Computer - HoloCure - Save the Fans - Stage 2 - Holo Office.png" trans="244a35" width="1597" height="1234"/>
+ </tileset>
+ <layer id="1" name="Background" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt2NeS0mAYxvFv2SKQuImK/QLsnup2e6+rntv12O4t6HoDuP3IsurYvQC7p+t2e+/lUMX1zxAGZeMoSwLJ8DLzmwAPyfN+EzJM6CxXqhNd6EYPetGHfgzgAR7iER7jCZ7iGZ7jBV7iFV7jDd7iHd7jAz7iEz7jC75avdIt3dI9/O45hlIxVKASVahGDWpRh3mYjwVYiEVYjCVYimVYjhVYifhjNds1WIt1WI96bMBGbDIS3VGHu1cZ/9/t9Loz6c7nugu1O9PzfSKi1Emcwml0RLz3XYtax25EE5rRgla0of0v60h/z+4z59n3Ai7iEi7jCq7imtUdzWN3oa67ULvzeb4z7bZ7bdcds449CGUqVYQAilGCUpRhBIIIIQwNOkaaieMabE2MwmiMQQRjMQ7jMQETMQmTzURvNMvucnP43dmuO5vufK67ULvzeb7d6t5sORhS6hD2YC/2YT/KtD85mSe7f8+P6EodRQOO6UP3dyq3647bgZ3Yhd2a83lAS3UHbHK315/sTn4ul/3p3Q02+7sxw89wqjv+/F/7O30NJLsNnpv4xgzf8QMxdASVOoOzOBfMLE/vOhBKXcuHba5nySV3OvfCDH7N76ML3ehBL/rQjwHJJc9B7oUZ/JrP5Te4ApWoQjVqUIu6sOSSu597YQa/5sfRiCY0owWtaEO75JLnIPfCDH7N4/fzg1DcdxdZ/68UowSlmuSSu597YQa/5luwFduwXRv6/6nkkrude2EGv+bXcQM3cQu3cQd3cU9yyXOQe2EGv+ZTdKWmYhqmYwZmYhZm65JL7n7uhRn8mv8C6aZB4w==
+  </data>
+ </layer>
+ <layer id="2" name="Lighting" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt0zdOA2EUReFHjgJLnsLeEsFk05MzGyJnFoLJcRMEk6GHM7VthPxmQJbulb5m9EtHrxizn5dvK593aquttq+daTe7TZnd4R4PyKcKvxV7412p9iOe8IwXvOIN7/jAp9pqV1A7SMTXDu/qSJt1ogvdyKQLvxV7412pdg960Yd+DGAQQ8hiWG21K6gd/r9xtcO7PDz7r67u1t1/2Q7/33L9ZktJs2WsYBVrWMcGNrGFbexgF3vYT/rvUltttf3tr/BdYFaFatSgFnWoRwMa0YRmtKA1iOYutdVW29ce4d0oxjCOCUxiCtOYwSzmMI8FLEZ0l9pqq+1rH/Auh0Mc4RgnOMUZznGBS1zhGjcR3aW22mrH29Y0TdM0TdM0TdM0TdO0uPYN+JE+Yw==
+  </data>
+ </layer>
+ <layer id="7" name="Posters" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJzt1kkKwkAQQNEyIVsVHMDosdR7qOAA6rXU06hHUC/gX2SZZYvTf/DpXSU0FUiEpG92a0Tc6UHdIqJH/SLN7CZzWtSu5g04Sxommv+pOkX6u5TqjLOICU1pxa6taZNo52bMmdOimrfl3NH+x3d6WaS/S6nOge/2SKfs9c86s8sXurrTUhJlzv8sjfJ3v4kkSZIkSZIkSZIkSdL/eQIZoRC3
+  </data>
+ </layer>
+ <layer id="8" name="Graphics" width="240" height="13">
+  <data encoding="base64" compression="zlib">
+   eJztmMsuBEEUhs/M7Hr2MwmegD0Sl2TsXRZ4AvZYuD6AyxsgwYJnwBOwR+Ju77LAC/glKtM5OV1TVYpJp8+X/Ivprv7/qqROn5omUhRFceO9RPQBfZbaPRNFKQ4zZaLZcvP3ckK0Aq1Ca4k8RmIS96egaTZOuhY7W8qx5RY5m3trdr6yOWd45jz13B387qEH6DGRx0gc4/4JdMrGSddiZ0s5ttwiZ3Nvzc5XNqe7QtRTaf4ersKzRvQENaryGIkO3O+Eutg46VrsbCnHllvkbO6t2fnKdqFRJxqpx/HSbM0uWvYi6nKp9nfZ1/C+gW6hdfTvDWgT2vrp5YfwPfLwNl4x8M2OiWZrdpo57Ol5aMFzb7vUw2/WPYDnBqEh6Bk1+wK9Qm9JmJ/xMoSuW1F8sPWgELjPBbwvoSvPfWzqIca8JI89eO9DB9Aozt9j0Dg0UbV7ZdVlrHUrig+xepB5D3CfXnj3Qf2efdLUlm1erc7YWXPywbUuY61bUULgPYjv0VZ90LwHuM82ru1Au/VsL1ufsvXGVmcHaU6+PdG1Ll3WrSj/hdmjMXqYIcsrtE+FnB1cstLftrQulTyT1Vfb7fVNyP9XF9LfthRFaQ9fb1QulA==
+  </data>
+ </layer>
+ <objectgroup id="3" name="Walls">
+  <object id="18" x="0" y="0" width="32" height="80"/>
+  <object id="21" x="32" y="0" width="464" height="64"/>
+  <object id="24" x="528" y="0" width="464" height="64"/>
+  <object id="25" x="496" y="0" width="32" height="80"/>
+  <object id="27" x="992" y="0" width="32" height="80"/>
+  <object id="29" x="1024" y="0" width="464" height="64"/>
+  <object id="31" x="1488" y="0" width="32" height="80"/>
+  <object id="32" x="1590" y="137.5" width="0.5"/>
+  <object id="34" x="1520" y="0" width="464" height="64"/>
+  <object id="36" x="1984" y="0" width="32" height="80"/>
+  <object id="41" x="2016" y="0" width="464" height="64"/>
+  <object id="42" x="2480" y="0" width="32" height="80"/>
+  <object id="43" x="2512" y="0" width="464" height="64"/>
+  <object id="44" x="2976" y="0" width="32" height="80"/>
+  <object id="45" x="3008" y="0" width="464" height="64"/>
+  <object id="46" x="3472" y="0" width="32" height="80"/>
+  <object id="48" x="3504" y="0" width="336" height="64"/>
+ </objectgroup>
+ <objectgroup id="4" name="Tables">
+  <object id="2" x="3750.5" y="150" width="57" height="35"/>
+  <object id="3" x="3606.5" y="118" width="56.5" height="36"/>
+  <object id="4" x="3430" y="150" width="57" height="36"/>
+  <object id="5" x="3286.5" y="118.5" width="56.5" height="35.5"/>
+  <object id="6" x="3127" y="149.5" width="58" height="36.5"/>
+  <object id="7" x="2999" y="117.5" width="56" height="38"/>
+  <object id="8" x="438.5" y="134" width="57" height="39"/>
+  <object id="9" x="279" y="150" width="56.5" height="37.5"/>
+  <object id="10" x="166.5" y="102" width="56.5" height="38"/>
+  <object id="11" x="38.5" y="135" width="58" height="39"/>
+ </objectgroup>
+ <objectgroup id="5" name="Vending Machines"/>
+ <objectgroup id="6" name="Sofas"/>
+</map>

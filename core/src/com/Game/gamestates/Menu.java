@@ -33,7 +33,7 @@ public class Menu implements Screen {
         }
     }
     public static void controls(){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){ // p to exit game
+        if (Gdx.input.isKeyJustPressed(Input.Keys.P)){ // p to exit game, i want to make it a pause screen but it's low prio rn
             Gdx.app.exit();
         }
     }
