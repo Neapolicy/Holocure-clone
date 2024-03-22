@@ -60,6 +60,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     public void show() {
         map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
+
         camera = new OrthographicCamera();
         gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
     }
@@ -86,7 +87,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 //        }
         game.batch.end();
     }
-    public void cameraUpdate(){
+    public void cameraUpdate(){ //renders the tile map and stuff
         camera.update();
         renderer.setView(camera);
         CameraStyles.lockOnTarget(camera, player.position);
@@ -94,9 +95,12 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         float startX = camera.viewportWidth / 2;
         float startY = camera.viewportHeight / 2;
+
         MapProperties properties = map.getProperties();
+
         float levelWidth = properties.get("width", Integer.class);
         float levelHeight = properties.get("height", Integer.class);
+
         CameraStyles.boundary(camera, startX, startY, levelWidth * 16 - startX * 2, levelHeight);
     }
 
@@ -107,7 +111,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         int seconds = (int) (timePassed % 60);
         timerText = String.format("%02d:%02d", minutes, seconds);
         // Display the timer
-        game.font24.draw(game.batch, timerText, player.position.x - 50, player.position.y + 500);
+        game.font24.draw(game.batch, timerText, player.position.x - 50, Gdx.graphics.getHeight());
     }
 
     @Override
