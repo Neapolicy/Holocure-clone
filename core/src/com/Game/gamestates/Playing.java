@@ -5,7 +5,6 @@ import com.Game.Entities.Player;
 import com.Game.Utils.CameraStyles;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
@@ -16,8 +15,6 @@ import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
@@ -33,7 +30,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private String timerText;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-    private Viewport gamePort;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
         this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
@@ -59,10 +55,10 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     @Override
     public void show() {
         map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
+
         renderer = new OrthogonalTiledMapRenderer(map);
 
         camera = new OrthographicCamera();
-        gamePort = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
     }
 
     @Override
@@ -100,6 +96,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         float levelWidth = properties.get("width", Integer.class);
         float levelHeight = properties.get("height", Integer.class);
+        System.out.println(player.position.x);
 
         CameraStyles.boundary(camera, startX, startY, levelWidth * 16 - startX * 2, levelHeight);
     }
