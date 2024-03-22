@@ -96,7 +96,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         float levelWidth = properties.get("width", Integer.class);
         float levelHeight = properties.get("height", Integer.class);
-        System.out.println(player.position.x);
 
         CameraStyles.boundary(camera, startX, startY, levelWidth * 16 - startX * 2, levelHeight);
     }
