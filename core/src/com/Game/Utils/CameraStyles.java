@@ -43,7 +43,7 @@ public class CameraStyles { //https://github.com/cnnranderson/YT_Tut1/blob/maste
     }
     public static void boundary(Camera camera, float startX, float startY, float width, float height){
         Vector3 position = camera.position;
-        if (position.x < startX){
+        if (position.x < startX) {
             position.x = startX;
         }
         if (position.y < startY){

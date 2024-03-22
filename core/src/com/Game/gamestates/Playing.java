@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -23,6 +24,7 @@ import static com.Game.gamestates.Menu.controls;
 
 public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ5lBgCY by connor the goat
     public static Texture backgroundTexture = new Texture("Backgrounds/playing_bg.png");
+    public static float levelWidth, levelHeight;
     private Music bgm;
     private myGdxGame game;
     private Player player;
@@ -32,7 +34,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private ArrayList<Enemy> enemies = new ArrayList<>();
-    private Weapon weapon;
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
         this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
 
@@ -64,44 +65,49 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
 
     @Override
-    public void show() {
+    public void show() { //https://www.youtube.com/watch?v=zckxJn751Gw
+        camera.zoom = 4 / 5f;
+        player.setPosition(20, 20);
     }
-
     @Override
-    public void render(float delta) { //https://www.youtube.com/watch?v=zckxJn751Gw
+    public void render(float delta) {
         controls();
+        cameraUpdate();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        cameraUpdate();
-        renderer.render();
+
+        // Render the tilemap before starting the SpriteBatch
 
         game.batch.begin();
 
-//        player.draw();
+        player.draw();
+        renderer.render();
 
         getTime();
 
-//        for (Enemy enemy: enemies){
-//            enemy.draw(player.position);
-//        }
+        // for (Enemy enemy: enemies){
+        //     enemy.draw(player.position);
+        // }
+
         game.batch.end();
     }
+
     public void cameraUpdate(){ //renders the tile map and stuff
-        camera.update();
         renderer.setView(camera);
         CameraStyles.lockOnTarget(camera, player.position);
         game.batch.setProjectionMatrix(camera.combined);
 
-        float startX = camera.viewportWidth / 2;
-        float startY = camera.viewportHeight / 2;
+        float startX = (camera.viewportWidth * 4/5) / 2;
+        float startY = (camera.viewportHeight * 4/5) / 2;
 
         MapProperties properties = map.getProperties();
 
-        float levelWidth = properties.get("width", Integer.class);
-        float levelHeight = properties.get("height", Integer.class);
+        levelWidth = properties.get("width", Integer.class);
+        levelHeight = properties.get("height", Integer.class);
 
         CameraStyles.boundary(camera, startX, startY, levelWidth * 16 - startX * 2, levelHeight * 16 - startY * 2);
+        camera.update();
     }
 
     public void getTime(){
@@ -118,7 +124,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     public void resize(int width, int height) {
         camera.viewportWidth = width;
         camera.viewportHeight = height;
-        camera.update();
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
-        sprite.setScale(.01f);
+        sprite.setSize(100, 100);
         weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000, screen);
     }
 
@@ -51,7 +51,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             playerIdle();
             isRunning = false; // Set running flag to false
         }
-        useWeapon();
+        playerBoundaries();
+//        useWeapon();
     }
     public void useWeapon(){
         weapon.attack(Playing.timePassed, 2, this);
@@ -70,6 +71,20 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             animator.changeColnRows(5, 1);
             animator.createAnimation(new Texture("Sprites/player_idle.png"), screen);
             isIdle = true; // Set the flag to true
+        }
+    }
+    public void playerBoundaries(){
+        if (position.x < -50){
+            position.x = -50;
+        }
+        if (position.x > Playing.levelWidth * 16 - sprite.getWidth()){
+            position.x = Playing.levelWidth * 16 - sprite.getWidth();
+        }
+        if (position.y < 0){
+            position.y = 0;
+        }
+        if (position.y > Gdx.graphics.getHeight() - sprite.getHeight()){
+            position.y = Gdx.graphics.getHeight() - sprite.getHeight();
         }
     }
 

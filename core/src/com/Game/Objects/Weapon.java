@@ -22,10 +22,10 @@ public class Weapon {
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
         sound = Gdx.audio.newSound(Gdx.files.internal("Audio/SFX/Gun_Fire.wav"));
+        animator.createAnimation(texture, game);
     }
 
     public void attack(float time, int cd, Player player){
-        animator.createAnimation(texture, game);
         if (time % cd > 0 && time % cd < .5){
             if (player.getLeft()){
                 animator.render((int) player.position.x - 25, (int) player.position.y);
