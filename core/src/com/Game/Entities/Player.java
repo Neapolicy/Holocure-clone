@@ -9,18 +9,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
-    private Animator animator = new Animator();
+    private Animator animator = new Animator(this);
     private boolean isRunning = false;
     private boolean isIdle = false;
-    public static boolean left = false;
-    private int flip = -1;
     private Weapon weapon;
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.01f);
         weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000, screen);
-
     }
 
     public void update(float deltatime) {
@@ -78,8 +75,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public void draw() { //https://www.youtube.com/watch?v=1fJrhgc0RRw&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=11 watch this
         update(Gdx.graphics.getDeltaTime()); //does movement
-        animator.render((int) position.x, (int) position.y);
-    }
+        animator.render((int) position.x, (int) position.y); //for some reason it can only draw one thing at a time??
+    } //if we stop drawing the player, it will draw the weapon
 
     public Animator getAnimator() {
         return animator;

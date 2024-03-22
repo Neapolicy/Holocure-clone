@@ -2,6 +2,7 @@ package com.Game.gamestates;
 
 import com.Game.Entities.Enemy;
 import com.Game.Entities.Player;
+import com.Game.Objects.Weapon;
 import com.Game.Utils.CameraStyles;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
@@ -31,9 +32,11 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private ArrayList<Enemy> enemies = new ArrayList<>();
+    private Weapon weapon;
     public Playing(myGdxGame game){ //to make the background work, i need to use a tile map editor
         this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
 
+        makeMap();
         initilizeEntities();
 
         game.font24.setColor(Color.WHITE);
@@ -52,13 +55,16 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         bgm.play();
     }
 
-    @Override
-    public void show() {
+    public void makeMap(){
         map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map);
 
         camera = new OrthographicCamera();
+    }
+
+    @Override
+    public void show() {
     }
 
     @Override

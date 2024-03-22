@@ -1,5 +1,6 @@
 package com.Game.Utils;
 
+import com.Game.Entities.Entity;
 import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
@@ -20,6 +21,13 @@ public class Animator{
     private Texture walkSheet;
     // A variable for tracking elapsed time for the animation
     private float stateTime;
+    private Entity entity;
+    public Animator(){
+
+    }
+    public Animator(Entity entity){
+        this.entity = entity;
+    }
 
     public void createAnimation(Texture walkSheet, myGdxGame game) {
 
@@ -61,12 +69,13 @@ public class Animator{
         currentFrame = walkAnimation.getKeyFrame(stateTime, true);
 
         // Get current frame of animation for the current stateTime
-        if (Player.left && !currentFrame.isFlipX()) {
-            currentFrame.flip(true, false); // Flip horizontally
-        } else if (!Player.left && currentFrame.isFlipX()) {
-            currentFrame.flip(true, false); // Flip back to original
+        if (entity != null){
+            if (entity.isLeft() && !currentFrame.isFlipX()) {
+                currentFrame.flip(true, false); // Flip horizontally
+            } else if (!entity.isLeft() && currentFrame.isFlipX()) {
+                currentFrame.flip(true, false); // Flip back to original
+            }
         }
-
         game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
     }
 

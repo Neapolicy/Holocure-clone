@@ -14,11 +14,15 @@ public class Entity extends Sprite {
     public Vector2 position;
     public myGdxGame screen;
     public Texture texture;
+    public boolean left;
     public Entity(int speed, Texture text, int x, int y, myGdxGame screen){
         this.speed = speed;
         texture = text;
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
         this.screen = screen;
+    }
+    public boolean isLeft(){
+        return left;
     }
 }
