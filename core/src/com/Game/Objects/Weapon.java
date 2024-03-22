@@ -16,12 +16,12 @@ public class Weapon {
     public Animator animator = new Animator();
     public Sound sound;
     public myGdxGame game;
-    public Weapon(Texture text, int x, int y, String fileLink, myGdxGame game){
+    public Weapon(Texture text, int x, int y, myGdxGame game){
         this.game = game;
         texture = text;
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
-        sound = Gdx.audio.newSound(Gdx.files.internal(fileLink));
+        sound = Gdx.audio.newSound(Gdx.files.internal("Audio/SFX/Gun_Fire.wav"));
     }
 
     public void attack(float time, int cd, Player player){

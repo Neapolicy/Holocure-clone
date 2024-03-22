@@ -17,7 +17,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setScale(.01f);
-        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000, "Gun_Fire.wav", screen);
+        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 1000, 1000, screen);
     }
 
     public void update(float deltatime) {

@@ -73,14 +73,12 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        cameraUpdate();
+        renderer.render();
 
         game.batch.begin();
 
-        cameraUpdate();
-
-        player.draw();
-
-        renderer.render();
+//        player.draw();
 
         getTime();
 

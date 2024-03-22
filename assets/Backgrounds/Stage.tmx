@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="240" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="58">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="240" height="68" tilewidth="16" tileheight="16" infinite="0" nextlayerid="10" nextobjectid="58">
  <tileset firstgid="1" name="Background" tilewidth="16" tileheight="16" tilecount="7623" columns="99">
   <grid orientation="orthogonal" width="8" height="8"/>
   <image source="stageSheet.png" trans="244a35" width="1597" height="1234"/>
  </tileset>
- <layer id="1" name="Background" width="240" height="68">
+ <layer id="9" name="Background" width="240" height="68">
   <data encoding="base64" compression="zlib">
-   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
+   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
   </data>
  </layer>
  <layer id="2" name="Lighting" width="240" height="68">
@@ -56,9 +56,9 @@
   <object id="11" x="38.5" y="135" width="58" height="39"/>
  </objectgroup>
  <objectgroup id="5" name="Vending Machines">
-  <object id="53" x="3824" y="64" width="16" height="144"/>
-  <object id="55" x="0" y="80" width="16" height="128"/>
-  <object id="57" x="16" y="192" width="3808" height="16"/>
+  <object id="53" x="3823.99" y="64" width="16.0156" height="1023.83"/>
+  <object id="55" x="0" y="80" width="16" height="1008"/>
+  <object id="57" x="16" y="1071.5" width="3808.5" height="16"/>
  </objectgroup>
  <objectgroup id="6" name="Sofas"/>
 </map>
