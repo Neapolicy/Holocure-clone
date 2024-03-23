@@ -49,7 +49,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
 
     public void initilizeEntities() {
-        player = new Player(500, new Texture("Sprites/player.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+        player = new Player(500, new Texture("Sprites/player_idle.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
     }
 
