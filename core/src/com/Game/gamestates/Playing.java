@@ -61,7 +61,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
 
     public void makeMap() {
-        map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
+        map = new TmxMapLoader().load("Backgrounds/Stage.tmx"); //it could be the stagesheet thing not having the transparent png but idk
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
     }
