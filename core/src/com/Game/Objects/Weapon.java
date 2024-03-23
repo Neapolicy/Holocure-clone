@@ -22,7 +22,7 @@ public class Weapon {
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
         sound = Gdx.audio.newSound(Gdx.files.internal("Audio/SFX/Gun_Fire.wav"));
-        animator.createAnimation(texture, game);
+        animator.createAnimation(new Texture("Effects/slash_effect.png"), game);
     }
 
     public void attack(float time, int cd, Player player){
@@ -34,6 +34,9 @@ public class Weapon {
                 animator.render((int) player.position.x + 50, (int) player.position.y);
             }
         }
+    }
+    public void setSize(float width, float height){
+        sprite.setSize(width, height);
     }
     public void dispose(){
         texture.dispose();

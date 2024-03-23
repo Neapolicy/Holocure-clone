@@ -12,7 +12,7 @@ public class Entity extends Sprite {
     public int speed;
     public Sprite sprite;
     public Vector2 position;
-    public myGdxGame screen;
+    public myGdxGame game;
     public Texture texture;
     public boolean left;
     public Entity(int speed, Texture text, int x, int y, myGdxGame screen){
@@ -20,7 +20,7 @@ public class Entity extends Sprite {
         texture = text;
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
-        this.screen = screen;
+        this.game = screen;
     }
     public boolean isLeft(){
         return left;
