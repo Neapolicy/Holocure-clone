@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Menu implements Screen {
@@ -13,15 +14,12 @@ public class Menu implements Screen {
     private myGdxGame game;
     private Animator animator = new Animator();
     private Animator animatorTwo = new Animator();
-    private Animator animatorThree = new Animator();
 
     public Menu(myGdxGame game){
         this.game = game;
         musicMan();
         animator.createAnimation(new Texture("Sprites/player_run.png"), game); //make sure that it matches
         animatorTwo.createAnimation(new Texture("Effects/slash_effect.png"), game);
-        animatorThree.changeColnRows(5, 1);
-        animatorThree.createAnimation(new Texture("Sprites/player_idle.png"), game);
     }
     public void musicMan(){
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/menu_music.wav"));
@@ -48,11 +46,10 @@ public class Menu implements Screen {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.begin();
-        game.batch.draw(Playing.backgroundTexture, 300, 100);
-        animatorThree.render(150, 100);
-//        animator.render(100, 100);
-//        animatorTwo.render(100, 200);
+        animator.render(100, 100);
+        animatorTwo.render(100, 200);
         controls();
         update();
         game.batch.end();
