@@ -2,6 +2,7 @@ package com.Game.Entities;
 
 import com.Game.Utils.Animator;
 import com.Game.Objects.Weapon;
+import com.Game.Utils.Hud;
 import com.Game.gamestates.Playing;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
@@ -56,7 +57,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         useWeapon();
     }
     public void useWeapon(){
-        weapon.attack(Playing.timePassed, 2, this);
+        weapon.attack(Hud.timePassed, 2, this);
     }
 
     public void playerRun() {

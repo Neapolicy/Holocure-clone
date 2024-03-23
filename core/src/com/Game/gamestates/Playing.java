@@ -2,8 +2,8 @@ package com.Game.gamestates;
 
 import com.Game.Entities.Enemy;
 import com.Game.Entities.Player;
-import com.Game.Objects.Weapon;
 import com.Game.Utils.CameraStyles;
+import com.Game.Utils.Hud;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -12,30 +12,25 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
 
 import static com.Game.gamestates.Menu.controls;
 
 public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ5lBgCY by connor the goat
-    public static Texture backgroundTexture = new Texture("Backgrounds/playing_bg.png");
     public static OrthographicCamera camera;
     public static float levelWidth, levelHeight;
     private Music bgm;
     private myGdxGame game;
     private Player player;
-    public static float timePassed = 0;
-    private String timerText;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private ArrayList<Enemy> enemies = new ArrayList<>();
+    private Hud hud;
 
     public Playing(myGdxGame game) { //to make the background work, i need to use a tile map editor
         this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
@@ -44,6 +39,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         initilizeEntities();
 
         game.font24.setColor(Color.WHITE);
+        hud = new Hud(game.batch, game);
 
 //        musicMan();
     }
@@ -75,6 +71,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     @Override
     public void render(float delta) {
         controls();
+        hud.update();
         cameraUpdate();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -87,13 +84,16 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         player.draw();
 
-        getTime();
+//        getTime();
 
         for (Enemy enemy : enemies) {
             enemy.draw(player.position);
         }
 
         game.batch.end();
+
+        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+        hud.stage.draw();
     }
 
     public void cameraUpdate() { //renders the tile map and stuff
@@ -113,15 +113,15 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         camera.update();
     }
 
-    public void getTime() {
-        float deltaTime = Gdx.graphics.getDeltaTime();
-        timePassed += deltaTime;
-        int minutes = (int) (timePassed / 60);
-        int seconds = (int) (timePassed % 60);
-        timerText = String.format("%02d:%02d", minutes, seconds);
-        // Display the timer
-        game.font24.draw(game.batch, timerText, player.position.x - 50, Gdx.graphics.getHeight());
-    }
+//    public void getTime() {
+//        float deltaTime = Gdx.graphics.getDeltaTime();
+//        timePassed += deltaTime;
+//        int minutes = (int) (timePassed / 60);
+//        int seconds = (int) (timePassed % 60);
+//        timerText = String.format("%02d:%02d", minutes, seconds);
+//        // Display the timer
+//        game.font24.draw(game.batch, timerText, player.position.x - 50, Gdx.graphics.getHeight());
+//    }
 
     @Override
     public void resize(int width, int height) {
@@ -148,11 +148,11 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     public void dispose() {
         player.getAnimator().dispose();
         player.getWeapon().dispose();
-        backgroundTexture.dispose();
         game.font24.dispose();
         game.dispose();
         map.dispose();
         renderer.dispose();
+        hud.dispose();
     }
 
     public myGdxGame getGame() {
