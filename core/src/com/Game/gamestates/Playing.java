@@ -49,7 +49,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
 
     public void initilizeEntities() {
-        player = new Player(500, new Texture("Sprites/bullet.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
+        player = new Player(500, new Texture("Sprites/player.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game);
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
     }
 
@@ -81,9 +81,9 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Render the tilemap before starting the SpriteBatch
+        game.batch.begin();
 
         renderer.render(); //place it below idk lol
-        game.batch.begin();
 
         player.draw();
 
