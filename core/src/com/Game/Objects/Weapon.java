@@ -33,14 +33,14 @@ public class Weapon {
     }
 
     public void attack(double time, int cd) {
-        if (time % cd > 0 && time % cd < 0.5) {
+        if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
                 animator.render((int) player.position.x, (int) player.position.y);
             } else {
                 animator.render((int) (player.position.x + player.sprite.getWidth()), (int) player.position.y);
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
-                if (time % cd > 0 && time % cd < 0.5) {
+                if (time % cd > 1 && time % cd < 1.5) {
                     attacking = true;
                     sound.play();
                     lastAttackTime = time; // Update the last attack time
@@ -53,14 +53,11 @@ public class Weapon {
         sound = Gdx.audio.newSound(Gdx.files.internal(fileLink));
     }
 
-    public void setSize(float width, float height) {
-        sprite.setSize(width, height);
-    }
-
     public void dispose() {
         texture.dispose();
         sound.dispose();
         animator.dispose();
+        game.dispose();
     }
 }
 

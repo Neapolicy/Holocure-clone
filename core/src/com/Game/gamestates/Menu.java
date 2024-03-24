@@ -7,6 +7,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Menu implements Screen {
@@ -14,6 +15,7 @@ public class Menu implements Screen {
     private myGdxGame game;
     private Animator animator = new Animator();
     private Animator animatorTwo = new Animator();
+    Texture text;
 
     public Menu(myGdxGame game){
         this.game = game;

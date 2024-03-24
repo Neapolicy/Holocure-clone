@@ -16,6 +16,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     private boolean isRunning = false;
     private boolean isIdle = false;
     private Weapon weapon;
+    private Texture playerRun, playerIdle;
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
@@ -25,6 +26,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, 10, this, game);
         weapon.setAudio("Audio/SFX/sword_swing.wav");
         weapon.sprite.setSize(100, 100);
+        playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
+        playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
     }
 
     public void update(float deltatime) {
@@ -66,7 +69,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void playerRun() {
         if (!isRunning) {
             animator.changeColnRows(6, 1);
-            animator.createAnimation(new Texture("Sprites/player_run.png"), game);
+            animator.createAnimation(playerRun, game);
             isRunning = true; // Set the flag to true
         }
     }
@@ -74,7 +77,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void playerIdle() {
         if (!isIdle) {
             animator.changeColnRows(5, 1);
-            animator.createAnimation(new Texture("Sprites/player_idle.png"), game);
+            animator.createAnimation(playerIdle, game);
             isIdle = true; // Set the flag to true
         }
     }

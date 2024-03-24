@@ -73,14 +73,17 @@ public class Animator{
         game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
     }
 
-    public Texture changeTextureSize(String filePath, int width, int height){ //this works, but I need to figure out how to implement it
+    public Texture changeTextureSize(String filePath, int width, int height) {
         Pixmap pixmap200 = new Pixmap(Gdx.files.internal(filePath));
         Pixmap pixmap100 = new Pixmap(width, height, pixmap200.getFormat());
         pixmap100.drawPixmap(pixmap200, 0, 0, pixmap200.getWidth(), pixmap200.getHeight(), 0, 0, pixmap100.getWidth(), pixmap100.getHeight());
         pixmap200.dispose();
-        pixmap100.dispose();
-        return new Texture(pixmap100);
+        Texture resizedTexture = new Texture(pixmap100);
+        pixmap100.dispose(); // Dispose the pixmap after creating the texture
+
+        return resizedTexture; // Return the newly created texture
     }
+
     public void dispose() { // SpriteBatches and Textures must always be disposed
         walkSheet.dispose();
     }
