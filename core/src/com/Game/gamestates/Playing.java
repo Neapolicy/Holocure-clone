@@ -84,8 +84,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         player.draw();
 
-//        getTime();
-
         for (Enemy enemy : enemies) {
             enemy.draw(player.position);
         }
@@ -112,16 +110,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         CameraStyles.boundary(camera, startX, startY, levelWidth * 16 - startX * 2, levelHeight * 16 - startY * 2);
         camera.update();
     }
-
-//    public void getTime() {
-//        float deltaTime = Gdx.graphics.getDeltaTime();
-//        timePassed += deltaTime;
-//        int minutes = (int) (timePassed / 60);
-//        int seconds = (int) (timePassed % 60);
-//        timerText = String.format("%02d:%02d", minutes, seconds);
-//        // Display the timer
-//        game.font24.draw(game.batch, timerText, player.position.x - 50, Gdx.graphics.getHeight());
-//    }
 
     @Override
     public void resize(int width, int height) {

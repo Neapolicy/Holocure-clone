@@ -11,27 +11,30 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Weapon {
     public Texture texture;
+    public Player player;
     public Sprite sprite;
     public Vector2 position;
-    public Animator animator = new Animator();
+    public Animator animator;
     public Sound sound;
     public myGdxGame game;
-    public Weapon(Texture text, int x, int y, myGdxGame game){
+    public Weapon(Texture text, int x, int y, Player player, myGdxGame game){
         this.game = game;
         texture = text;
+        this.player = player;
+        animator = new Animator(player);
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
         sound = Gdx.audio.newSound(Gdx.files.internal("Audio/SFX/Gun_Fire.wav"));
         animator.createAnimation(new Texture("Effects/slash_effect.png"), game);
     }
 
-    public void attack(float time, int cd, Player player){
+    public void attack(double time, int cd){
         if (time % cd > 0 && time % cd < .5){
             if (player.getLeft()){
-                animator.render((int) player.position.x - 25, (int) player.position.y);
+                animator.render((int) player.position.x, (int) player.position.y);
             }
             else{
-                animator.render((int) player.position.x + 50, (int) player.position.y);
+                animator.render((int) ((int) player.position.x + player.sprite.getWidth()), (int) player.position.y);
             }
         }
     }

@@ -20,7 +20,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setSize(50, 50);
-        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, game);
+        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, this, game);
         weapon.sprite.setSize(100, 100);
     }
 
@@ -57,7 +57,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         useWeapon();
     }
     public void useWeapon(){
-        weapon.attack(Hud.timePassed, 2, this);
+        weapon.attack(Hud.timePassed, 2);
     }
 
     public void playerRun() {
@@ -79,8 +79,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         if (position.x < -50){
             position.x = -50;
         }
-        if (position.x > Playing.levelWidth * 16 - sprite.getWidth()){
-            position.x = Playing.levelWidth * 16 - sprite.getWidth();
+        if (position.x > Playing.levelWidth * 16 - sprite.getWidth() * 2){
+            position.x = Playing.levelWidth * 16 - sprite.getWidth() * 2;
         }
         if (position.y < 0){
             position.y = 0;
