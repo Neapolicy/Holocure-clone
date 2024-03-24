@@ -89,7 +89,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             position.y = Gdx.graphics.getHeight() - sprite.getHeight();
         }
     }
-    public void checkLeft(OrthographicCamera camera){ //find cursor location
+    public void checkLeft(OrthographicCamera camera){ //find cursor location relative to the world location
         Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         camera.unproject(touchPos);
         left = touchPos.x < position.x;
