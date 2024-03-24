@@ -29,7 +29,6 @@ public class Weapon {
         animator = new Animator(player);
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
-        sound = Gdx.audio.newSound(Gdx.files.internal("Audio/SFX/Gun_Fire.wav"));
         animator.createAnimation(new Texture("Effects/slash_effect.png"), game);
     }
 
@@ -43,11 +42,15 @@ public class Weapon {
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 0 && time % cd < 0.5) {
                     attacking = true;
+                    sound.play();
                     lastAttackTime = time; // Update the last attack time
                 }
                 attacking = false; // Not enough time has passed since the last attack
             }
         }
+    }
+    public void setAudio(String fileLink){
+        sound = Gdx.audio.newSound(Gdx.files.internal(fileLink));
     }
 
     public void setSize(float width, float height) {
@@ -56,6 +59,8 @@ public class Weapon {
 
     public void dispose() {
         texture.dispose();
+        sound.dispose();
+        animator.dispose();
     }
 }
 

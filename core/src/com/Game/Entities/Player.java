@@ -24,6 +24,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         sprite.setSize(50, 50);
         weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, 10, this, game);
         weapon.sprite.setSize(100, 100);
+        weapon.setAudio("Audio/SFX/sword_swing.wav");
     }
 
     public void update(float deltatime) {
