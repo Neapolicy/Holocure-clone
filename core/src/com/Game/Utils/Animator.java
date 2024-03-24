@@ -1,13 +1,11 @@
 package com.Game.Utils;
 
 import com.Game.Entities.Entity;
-import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Animator{
@@ -22,15 +20,12 @@ public class Animator{
     // A variable for tracking elapsed time for the animation
     private float stateTime;
     private Entity entity;
-    public Animator(){
-
-    }
-    public Animator(Entity entity){
+    public Animator(){}
+    public Animator(Entity entity){ //if its a player/weapon, gives it the ability to move left and right
         this.entity = entity;
     }
 
     public void createAnimation(Texture walkSheet, myGdxGame game) {
-
         // Load the sprite sheet as a Texture
         this.walkSheet = walkSheet;
         this.game = game;
@@ -78,6 +73,14 @@ public class Animator{
         game.batch.draw(currentFrame, x, y); // Draw current frame at (50, 50)
     }
 
+    public Texture changeTextureSize(String filePath, int width, int height){ //this works, but I need to figure out how to implement it
+        Pixmap pixmap200 = new Pixmap(Gdx.files.internal(filePath));
+        Pixmap pixmap100 = new Pixmap(width, height, pixmap200.getFormat());
+        pixmap100.drawPixmap(pixmap200, 0, 0, pixmap200.getWidth(), pixmap200.getHeight(), 0, 0, pixmap100.getWidth(), pixmap100.getHeight());
+        pixmap200.dispose();
+        pixmap100.dispose();
+        return new Texture(pixmap100);
+    }
     public void dispose() { // SpriteBatches and Textures must always be disposed
         walkSheet.dispose();
     }
