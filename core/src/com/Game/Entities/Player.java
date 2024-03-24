@@ -19,8 +19,10 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
+        currentHp = 100;
+        hp = 100;
         sprite.setSize(50, 50);
-        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, this, game);
+        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, 10, this, game);
         weapon.sprite.setSize(100, 100);
     }
 

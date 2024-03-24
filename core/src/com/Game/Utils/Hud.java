@@ -22,6 +22,7 @@ public class Hud implements Disposable{
     //Scene2D widgets
     private Label countdownLabel;
     private Label timeLabel;
+    private Label healthLabel;
 
     public Hud(SpriteBatch sb, myGdxGame game){
         //define our tracking variables
@@ -41,12 +42,16 @@ public class Hud implements Disposable{
         //define our labels using the String, and a Label style consisting of a font and color
         countdownLabel = new Label(String.format("%02d:%02d", minutes, seconds), new Label.LabelStyle(game.font24, Color.WHITE));
         timeLabel = new Label("STAGE", new Label.LabelStyle(game.font24, Color.WHITE));
+        healthLabel = new Label(String.format("%02d/%02d", 100, 100), new Label.LabelStyle(game.font24, Color.WHITE));
 
         //add our labels to our table, padding the top, and giving them all equal width with expandX
-        table.add(timeLabel).expandX().padTop(10);
-        //add a second row to our table
+        table.add(healthLabel).left().padRight(10);
+        //add row two
         table.row();
-        table.add(countdownLabel).expandX();
+        table.add(timeLabel).center().padTop(10);
+        //add a third row to our table
+        table.row();
+        table.add(countdownLabel).expandX().padTop(10);
 
         //add our table to the stage
         stage.addActor(table);
@@ -60,6 +65,9 @@ public class Hud implements Disposable{
         minutes = (int) (timePassed / 60);
         seconds = (int) (timePassed % 60);
         countdownLabel.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+    public void healthCheck(int currentHp){
+        healthLabel.setText(String.format("%02d/%02d", currentHp, 100));
     }
     @Override
     public void dispose() { stage.dispose(); }

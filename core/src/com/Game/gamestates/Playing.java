@@ -72,6 +72,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     public void render(float delta) {
         controls();
         hud.update();
+        hud.healthCheck(player.currentHp);
         cameraUpdate();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);

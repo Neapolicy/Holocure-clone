@@ -17,13 +17,15 @@ public class Weapon {
     public Animator animator;
     public boolean attacking;
     private double lastAttackTime = 0.0;
+    private int damage;
     public Sound sound;
     public myGdxGame game;
 
-    public Weapon(Texture text, int x, int y, Player player, myGdxGame game) {
+    public Weapon(Texture text, int x, int y, int damage, Player player, myGdxGame game) {
         this.game = game;
         texture = text;
         this.player = player;
+        this.damage = damage;
         animator = new Animator(player);
         sprite = new Sprite(texture);
         position = new Vector2(x, y);
