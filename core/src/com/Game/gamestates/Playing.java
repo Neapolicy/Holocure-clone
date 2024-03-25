@@ -49,7 +49,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         enemies.add(new Enemy(500, new Texture("Sprites/bullet.png"), 300, 300, game));
     }
 
-    public void musicMan() {
+    public void musicMan() { //turned this off bc I don't want to hear this every time I playtest
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/combat_music.wav"));
         bgm.setVolume(.3f);
         bgm.setLooping(true);

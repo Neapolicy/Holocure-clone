@@ -15,7 +15,6 @@ public class Menu implements Screen {
     private myGdxGame game;
     private Animator animator = new Animator();
     private Animator animatorTwo = new Animator();
-    Texture text;
 
     public Menu(myGdxGame game){
         this.game = game;
@@ -32,7 +31,7 @@ public class Menu implements Screen {
     public void update(){
         if (Gdx.input.isButtonJustPressed(0)){
             bgm.stop();
-            game.setScreen(new Playing(game));
+            game.setScreen(new Selection(game));
         }
     }
     public static void controls(){

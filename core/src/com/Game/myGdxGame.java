@@ -42,7 +42,7 @@ public class myGdxGame extends Game{
 			font24 = generator.generateFont(parameter);
 			generator.dispose(); // avoid memory leaks, important
 		} catch (Exception e) {
-			System.out.println("no");
+			System.out.println("error");
         }
     }
 }

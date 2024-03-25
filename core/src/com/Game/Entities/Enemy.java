@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Enemy extends Entity{
-    private Animator animator;
     public Enemy(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
         sprite.setSize(50, 50);
@@ -22,7 +21,7 @@ public class Enemy extends Entity{
         direction.nor(); // Normalize the direction vector
 
         // Move the enemy (adjust the speed as needed)
-        float speed = 400; // You can change this value
+         // You can change this value
         position.x += direction.x * speed * deltatime;
         position.y += direction.y * speed * deltatime;
     }
