@@ -28,7 +28,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     }
     public void initWeapon(){
         weapon = new Weapon(100, 100, 10, this, game);
-        weapon.changeColumnsNRows(8, 1);
+        weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
         weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
         weapon.setAudio("Audio/SFX/spear_swing.wav");
     }
