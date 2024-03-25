@@ -64,7 +64,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
     @Override
     public void show() { //https://www.youtube.com/watch?v=zckxJn751Gw
-        camera.zoom = 4 / 5f;
+        camera.zoom = 2 / 5f;
         player.setPosition(20, 20);
     }
 
@@ -100,8 +100,8 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         CameraStyles.lockOnTarget(camera, player.position);
         game.batch.setProjectionMatrix(camera.combined);
 
-        float startX = (camera.viewportWidth * 4 / 5) / 2;
-        float startY = (camera.viewportHeight * 4 / 5) / 2;
+        float startX = (camera.viewportWidth * 2 / 5) / 2;
+        float startY = (camera.viewportHeight * 2 / 5) / 2;
 
         MapProperties properties = map.getProperties();
 
