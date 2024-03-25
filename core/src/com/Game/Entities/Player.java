@@ -23,8 +23,9 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         currentHp = 100;
         hp = 100;
         weapon = new Weapon(100, 100, 10, this, game);
-        weapon.changeTextureSize("Effects/slash_effect.png", 500, 200);
-        weapon.setAudio("Audio/SFX/sword_swing.wav");
+        weapon.changeColumnsNRows(8, 1);
+        weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
+        weapon.setAudio("Audio/SFX/spear_swing.wav");
         playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
         playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
     }

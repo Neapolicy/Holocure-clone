@@ -54,6 +54,9 @@ public class Weapon {
     public void setAudio(String fileLink){
         sound = Gdx.audio.newSound(Gdx.files.internal(fileLink));
     }
+    public void changeColumnsNRows(int columns, int rows){
+        animator.changeColnRows(columns, rows);
+    }
 
     public void dispose() {
         texture.dispose();
