@@ -22,10 +22,9 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         super(speed, text, x, y, screen);
         currentHp = 100;
         hp = 100;
-        sprite.setSize(50, 50);
-        weapon = new Weapon(new Texture("Effects/slash_effect.png"), 100, 100, 10, this, game);
+        weapon = new Weapon(100, 100, 10, this, game);
+        weapon.changeTextureSize("Effects/slash_effect.png", 500, 200);
         weapon.setAudio("Audio/SFX/sword_swing.wav");
-        weapon.sprite.setSize(100, 100);
         playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
         playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
     }
@@ -85,8 +84,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         if (position.x < -50){
             position.x = -50;
         }
-        if (position.x > Playing.levelWidth * 16 - sprite.getWidth() * 2){
-            position.x = Playing.levelWidth * 16 - sprite.getWidth() * 2;
+        if (position.x > Playing.levelWidth * 16 - sprite.getWidth() / 2){ //prob won't be necessary to fix once i implement box2d
+            position.x = Playing.levelWidth * 16 - sprite.getWidth() / 2;
         }
         if (position.y < 0){
             position.y = 0;

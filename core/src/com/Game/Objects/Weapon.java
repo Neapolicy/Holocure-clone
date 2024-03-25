@@ -21,23 +21,25 @@ public class Weapon {
     public Sound sound;
     public myGdxGame game;
 
-    public Weapon(Texture text, int x, int y, int damage, Player player, myGdxGame game) {
+    public Weapon(int x, int y, int damage, Player player, myGdxGame game) {
         this.game = game;
-        texture = text;
         this.player = player;
         this.damage = damage;
         animator = new Animator(player);
-        sprite = new Sprite(texture);
         position = new Vector2(x, y);
-        animator.createAnimation(new Texture("Effects/slash_effect.png"), game);
+    }
+    public void changeTextureSize(String filepath, int width, int height){
+        texture = animator.changeTextureSize(filepath, width, height);
+        animator.createAnimation(texture, game);
+        sprite = new Sprite(texture);
     }
 
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) player.position.x, (int) player.position.y);
+                animator.render((int) (player.getCenterX() - sprite.getRegionWidth() / 8), (int) (player.getCenterY() - sprite.getHeight() / 2));
             } else {
-                animator.render((int) (player.position.x + player.sprite.getWidth()), (int) player.position.y);
+                animator.render((int) (player.getCenterX() + sprite.getRegionWidth() / 8), (int) (player.getCenterY() - sprite.getHeight() / 2));
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {

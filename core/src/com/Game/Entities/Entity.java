@@ -32,4 +32,11 @@ public class Entity extends Sprite {
     public boolean isLeft(){
         return left;
     }
+    public float getCenterX() {
+        return position.x + getWidth() / 2;
+    }
+
+    public float getCenterY() {
+        return position.y + getHeight() / 2;
+    }
 }
