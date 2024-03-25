@@ -22,12 +22,15 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         super(speed, text, x, y, screen);
         currentHp = 100;
         hp = 100;
+        initWeapon();
+        playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
+        playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
+    }
+    public void initWeapon(){
         weapon = new Weapon(100, 100, 10, this, game);
         weapon.changeColumnsNRows(8, 1);
         weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
         weapon.setAudio("Audio/SFX/spear_swing.wav");
-        playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
-        playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
     }
 
     public void update(float deltatime) {
