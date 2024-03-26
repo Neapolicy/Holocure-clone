@@ -16,7 +16,7 @@ import com.badlogic.gdx.physics.box2d.*;
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
     private Animator animator = new Animator(this);
     private World world;
-    private Body b2Body;
+    public Body b2Body;
     private boolean isRunning = false;
     private boolean isIdle = false;
     private Weapon weapon;
@@ -29,6 +29,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         currentHp = 100;
         hp = 100;
         initWeapon();
+
         playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
         playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
     }
@@ -46,7 +47,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
         FixtureDef fDef = new FixtureDef();
         CircleShape shape = new CircleShape();
-        shape.setRadius(5);
+        shape.setRadius(5 / myGdxGame.PPM);
 
         fDef.shape = shape;
         b2Body.createFixture(fDef);

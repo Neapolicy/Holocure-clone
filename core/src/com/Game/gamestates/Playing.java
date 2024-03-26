@@ -21,6 +21,8 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private Hud hud;
     private World world;
     private Box2DDebugRenderer b2dr; //box 2d vars
+    private Viewport viewport;
 
     public Playing(myGdxGame game) { //to make the background work, i need to use a tile map editor
         this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
@@ -83,15 +86,16 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
 
     public void makeMap() {
-        map = new TmxMapLoader().load("Backgrounds/Stage.tmx"); //it could be the stagesheet thing not having the transparent png but idk
-        renderer = new OrthogonalTiledMapRenderer(map, 1 / myGdxGame.PPM);
+        map = new TmxMapLoader().load("Backgrounds/Stage.tmx");
+        renderer = new OrthogonalTiledMapRenderer(map); //ppm scaling is WEIRD MAN,
         camera = new OrthographicCamera();
+        viewport = new FitViewport(myGdxGame.v_width, myGdxGame.v_height ,camera);
+        camera.position.set(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
     }
 
     @Override
     public void show() { //https://www.youtube.com/watch?v=zckxJn751Gw
         camera.zoom = 2 / 5f;
-        player.setPosition(20, 20);
     }
 
     @Override
