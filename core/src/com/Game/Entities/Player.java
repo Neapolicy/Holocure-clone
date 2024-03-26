@@ -9,17 +9,23 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
     private Animator animator = new Animator(this);
+    private World world;
+    private Body b2Body;
     private boolean isRunning = false;
     private boolean isIdle = false;
     private Weapon weapon;
     private Texture playerRun, playerIdle;
 
-    public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
+    public Player(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
+        this.world = world;
+        makePlayer();
         currentHp = 100;
         hp = 100;
         initWeapon();
@@ -31,6 +37,19 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
         weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
         weapon.setAudio("Audio/SFX/spear_swing.wav");
+    }
+    public void makePlayer(){
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(position.x, position.y);
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        b2Body = world.createBody(bdef);
+
+        FixtureDef fDef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(5);
+
+        fDef.shape = shape;
+        b2Body.createFixture(fDef);
     }
 
     public void update(float deltatime) {
@@ -62,7 +81,6 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             playerIdle();
             isRunning = false; // Set running flag to false
         }
-        playerBoundaries();
         useWeapon();
     }
     public void useWeapon(){
@@ -82,20 +100,6 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             animator.changeColnRows(5, 1);
             animator.createAnimation(playerIdle, game);
             isIdle = true; // Set the flag to true
-        }
-    }
-    public void playerBoundaries(){
-        if (position.x < -50){
-            position.x = -50;
-        }
-        if (position.x > Playing.levelWidth * 16 - sprite.getWidth() / 2){ //prob won't be necessary to fix once i implement box2d
-            position.x = Playing.levelWidth * 16 - sprite.getWidth() / 2;
-        }
-        if (position.y < 0){
-            position.y = 0;
-        }
-        if (position.y > Gdx.graphics.getHeight() - sprite.getHeight()){
-            position.y = Gdx.graphics.getHeight() - sprite.getHeight();
         }
     }
     public void checkLeft(OrthographicCamera camera){ //find cursor location relative to the world location

@@ -12,6 +12,7 @@ public class myGdxGame extends Game{
 	public SpriteBatch batch;
 	public BitmapFont font24;
 	public Animator animator;
+	public static final float PPM = 100; //pixel per meter
 
 	@Override
 	public void create () {

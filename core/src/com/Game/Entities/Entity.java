@@ -13,6 +13,9 @@ public class Entity extends Sprite {
     public Texture texture;
     public boolean left;
     public int hp, currentHp;
+    public Entity(){
+
+    }
     public Entity(int speed, Texture text, int x, int y, myGdxGame screen){
         this.speed = speed;
         texture = text;
