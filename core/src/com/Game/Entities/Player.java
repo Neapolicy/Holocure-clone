@@ -2,8 +2,8 @@ package com.Game.Entities;
 
 import com.Game.Objects.Axe;
 import com.Game.Objects.Spear;
-import com.Game.Utils.Animator;
 import com.Game.Objects.Weapon;
+import com.Game.Utils.Animator;
 import com.Game.Utils.Hud;
 import com.Game.gamestates.Playing;
 import com.Game.myGdxGame;
@@ -11,9 +11,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
     public static String weaponChoice;
