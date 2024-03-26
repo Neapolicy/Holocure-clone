@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
+    public static String weaponChoice;
     private Animator animator = new Animator(this);
     private World world;
     public Body b2Body;
@@ -34,9 +35,15 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     }
     public void initWeapon(){
         weapon = new Weapon(100, 100, 10, this, game);
-        weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
-        weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
-        weapon.setAudio("Audio/SFX/spear_swing.wav");
+        if (weaponChoice.equals("spear")){
+            weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
+            weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
+            weapon.setAudio("Audio/SFX/spear_swing.wav");
+        }
+        if (weaponChoice.equals("sword")){
+            weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
+            weapon.setAudio("Audio/SFX/sword_swing.wav");
+        }
     }
     public void makePlayer(){
 //        BodyDef bdef = new BodyDef();
