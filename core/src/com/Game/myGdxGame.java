@@ -35,6 +35,7 @@ public class myGdxGame extends Game{
 		super.dispose();
 		batch.dispose();
 		font24.dispose();
+		animator.dispose();
 	}
 	public void initFonts(){
 		try{
