@@ -25,7 +25,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public Player(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
         this.world = world;
-        makePlayer();
+//        makePlayer();
         currentHp = 100;
         hp = 100;
         initWeapon();

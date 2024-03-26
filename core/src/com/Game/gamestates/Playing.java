@@ -42,34 +42,34 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private Box2DDebugRenderer b2dr; //box 2d vars
     private Viewport viewport;
 
-    public Playing(myGdxGame game) { //to make the background work, i need to use a tile map editor
-        this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
+    public Playing(myGdxGame game) {
+        this.game = game;
 
         makeMap();
 
         game.font24.setColor(Color.WHITE);
         hud = new Hud(game.batch, game);
 
-        world = new World(new Vector2(0, 0), true); //box 2d init, also no gravity
-        b2dr = new Box2DDebugRenderer();
+//        world = new World(new Vector2(0, 0), true); //box 2d init, also no gravity
+//        b2dr = new Box2DDebugRenderer();
 
         initilizeEntities(); //OH THE ERROR IS THAT WORLD IS NULL BC I INITIALIZE THE PLAYER BEFORE THE WORLD
 
-        BodyDef bdef = new BodyDef(); //move these lines later, supposed to be their own individual project
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
-
-        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){ //change the number for each layer
-            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
-
-            body = world.createBody(bdef);
-            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
+//        BodyDef bdef = new BodyDef(); //move these lines later, supposed to be their own individual project
+//        PolygonShape shape = new PolygonShape();
+//        FixtureDef fdef = new FixtureDef();
+//        Body body;
+//
+//        for (MapObject object : map.getLayers().get(5).getObjects().getByType(RectangleMapObject.class)){ //change the number for each layer
+//            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
+//            bdef.type = BodyDef.BodyType.StaticBody;
+//            bdef.position.set(rectangle.getX() + rectangle.getWidth() / 2, rectangle.getY() + rectangle.getHeight() / 2);
+//
+//            body = world.createBody(bdef);
+//            shape.setAsBox(rectangle.getWidth() / 2, rectangle.getHeight() / 2);
+//            fdef.shape = shape;
+//            body.createFixture(fdef);
+//        }
 //        musicMan();
     }
 
@@ -103,7 +103,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         controls();
         hud.update();
         hud.healthCheck(player.currentHp);
-        world.step(1/60f, 6, 2);
+//        world.step(1/60f, 6, 2);
         cameraUpdate();
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -113,7 +113,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
 
         renderer.render(); //place it below idk lol
 
-        b2dr.render(world, camera.combined);
+//        b2dr.render(world, camera.combined);
 
         game.batch.begin();
 
