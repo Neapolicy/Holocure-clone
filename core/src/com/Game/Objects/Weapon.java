@@ -16,7 +16,7 @@ public class Weapon {
     public Vector2 position;
     public Animator animator;
     public boolean attacking;
-    private double lastAttackTime = 0.0;
+    public double lastAttackTime = 0.0;
     private int damage;
     public Sound sound;
     public myGdxGame game;

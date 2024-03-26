@@ -71,8 +71,9 @@ public class Selection implements Screen { //pick your weapon here
         Menu.controls();
         update();
         game.batch.begin();
-        game.font24.draw(game.batch, "Fire Ax", buttonTwo.getX(), buttonTwo.getY());
-        game.font24.draw(game.batch, "Flame Spear", buttonOne.getX(), buttonOne.getY());
+        game.fontArcon.draw(game.batch, "Pick Your Weapon", ((float) Gdx.graphics.getWidth() / 2) - 150, Gdx.graphics.getHeight());
+        game.fontArcon.draw(game.batch, "Fire Ax", buttonTwo.getX(), buttonTwo.getY());
+        game.fontArcon.draw(game.batch, "Flame Spear", buttonOne.getX(), buttonOne.getY());
         game.batch.end();
         stage.act();
         stage.draw();

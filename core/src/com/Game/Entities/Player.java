@@ -1,5 +1,7 @@
 package com.Game.Entities;
 
+import com.Game.Objects.Axe;
+import com.Game.Objects.Spear;
 import com.Game.Utils.Animator;
 import com.Game.Objects.Weapon;
 import com.Game.Utils.Hud;
@@ -34,15 +36,16 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
     }
     public void initWeapon(){
-        weapon = new Weapon(100, 100, 10, this, game);
         if (weaponChoice.equals("spear")){
+            weapon = new Spear(100, 100, 10, this, game);
             weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
             weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
             weapon.setAudio("Audio/SFX/spear_swing.wav");
         }
         if (weaponChoice.equals("sword")){
+            weapon = new Axe(100, 100, 10, this, game);
             weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
-            weapon.setAudio("Audio/SFX/sword_swing.wav");
+            weapon.setAudio("Audio/SFX/ax_swing.wav");
         }
         if (weaponChoice.equals("gun")){
             weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
