@@ -22,9 +22,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     private Weapon weapon;
     private Texture playerRun, playerIdle;
 
-    public Player(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
+    public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
-        this.world = world;
 //        makePlayer();
         currentHp = 100;
         hp = 100;
@@ -40,17 +39,17 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         weapon.setAudio("Audio/SFX/spear_swing.wav");
     }
     public void makePlayer(){
-        BodyDef bdef = new BodyDef();
-        bdef.position.set(position.x, position.y);
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        b2Body = world.createBody(bdef);
-
-        FixtureDef fDef = new FixtureDef();
-        CircleShape shape = new CircleShape();
-        shape.setRadius(5 / myGdxGame.PPM);
-
-        fDef.shape = shape;
-        b2Body.createFixture(fDef);
+//        BodyDef bdef = new BodyDef();
+//        bdef.position.set(position.x, position.y);
+//        bdef.type = BodyDef.BodyType.DynamicBody;
+//        b2Body = world.createBody(bdef);
+//
+//        FixtureDef fDef = new FixtureDef();
+//        CircleShape shape = new CircleShape();
+//        shape.setRadius(5 / myGdxGame.PPM);
+//
+//        fDef.shape = shape;
+//        b2Body.createFixture(fDef);
     }
 
     public void update(float deltatime) {
