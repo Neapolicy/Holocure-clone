@@ -27,8 +27,8 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     private OrthogonalTiledMapRenderer renderer;
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private Hud hud;
-    public Playing(myGdxGame game) { //to make the background work, i need to use a tile map editor
-        this.game = game; //use this video for reference https://www.youtube.com/watch?v=WRS9SC0i0oc&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=6
+    public Playing(myGdxGame game) {
+        this.game = game; //https://www.youtube.com/watch?v=xQXOC74oeSU recent video on box2d
         makeMap();
         initilizeEntities();
         game.font24.setColor(Color.WHITE);

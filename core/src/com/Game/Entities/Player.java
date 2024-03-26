@@ -44,6 +44,10 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
             weapon.setAudio("Audio/SFX/sword_swing.wav");
         }
+        if (weaponChoice.equals("gun")){
+            weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
+            weapon.setAudio("Audio/SFX/sword_swing.wav");
+        }
     }
     public void makePlayer(){
 //        BodyDef bdef = new BodyDef();
