@@ -11,3 +11,5 @@
 - [Slash Effects](https://opengameart.org/content/weapon-slash-effect)
 - [Background Sprites](https://www.spriters-resource.com/pc_computer/holocuresavethefans/sheet/206842/)
 - [Spear Effects](https://www.spriters-resource.com/pc_computer/holocuresavethefans/sheet/204696/)
+# ADDENDUM
+Huge shoutout to Connor Anderson and his tutorials for providing the foundations of my project
