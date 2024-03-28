@@ -85,19 +85,6 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         controls();
         hud.update();
         hud.healthCheck(player.currentHp);
-        cameraUpdate();
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        // Render the tilemap before starting the SpriteBatch
-        game.batch.begin();
-        renderer.render(); //place it below idk lol
-        player.draw();
-        for (Enemy enemy : enemies) {
-            enemy.draw(player.position);
-        }
-        game.batch.end();
-        game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-        hud.stage.draw();
     }
     public void cameraUpdate() { //renders the tile map and stuff
         renderer.setView(camera);
