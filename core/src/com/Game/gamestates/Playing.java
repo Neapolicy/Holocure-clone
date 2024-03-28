@@ -53,6 +53,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         b2dr = new Box2DDebugRenderer();
         playerBody = createBox(140, 40, 32, 32, false, world);
 
+        initilizeEntities();
         makeMap();
 
         TiledObjectUtil.parseObjectLayer(world, map.getLayers().get("Walls").getObjects());
