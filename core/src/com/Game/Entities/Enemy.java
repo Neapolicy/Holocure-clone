@@ -7,6 +7,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+import static com.Game.Utils.Constants.PPM;
+
 public class Enemy extends Entity{
     public Enemy(int speed, Texture text, int x, int y, myGdxGame screen) {
         super(speed, text, x, y, screen);
@@ -14,7 +16,7 @@ public class Enemy extends Entity{
     }
     public void followPlayer(float deltatime, Vector2 playerPos) {
         // Update player position (you might want to do this elsewhere)
-        playerPos = new Vector2(playerPos.x, playerPos.y);
+        playerPos = new Vector2(playerPos.x * PPM, playerPos.y * PPM);
 
         // Calculate direction vector
         Vector2 direction = new Vector2(playerPos.x - position.x, playerPos.y - position.y);

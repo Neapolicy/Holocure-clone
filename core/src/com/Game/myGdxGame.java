@@ -13,8 +13,6 @@ public class myGdxGame extends Game {
     public BitmapFont font24;
     public BitmapFont fontArcon;
     public Animator animator;
-    public static final float PPM = 100; //pixel per meter
-    public static final int v_width = 400, v_height = 208;
 
     @Override
     public void create() {

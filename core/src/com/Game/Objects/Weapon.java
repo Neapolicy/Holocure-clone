@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
+import static com.Game.Utils.Constants.PPM;
+
 public class Weapon {
     public Texture texture;
     public Player player;
@@ -37,9 +39,9 @@ public class Weapon {
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) (player.getCenterX() - sprite.getRegionWidth() / 8), (int) (player.getCenterY() - sprite.getHeight() / 2));
+                animator.render((int) (player.getPlayerBody().getPosition().x * PPM), (int) (player.getPlayerBody().getPosition().y * PPM));
             } else {
-                animator.render((int) (player.getCenterX() + sprite.getRegionWidth() / 8), (int) (player.getCenterY() - sprite.getHeight() / 2));
+                animator.render((int) (player.getPlayerBody().getPosition().x * PPM), (int) (player.getPlayerBody().getPosition().y * PPM));
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {

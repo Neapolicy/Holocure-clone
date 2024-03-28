@@ -83,7 +83,12 @@ public class Animator{
 
         return resizedTexture; // Return the newly created texture
     }
-
+    public static int getTextureSize(Texture texture){
+        return texture.getWidth();
+    }
+    public static int getTextureHeight(Texture texture){
+        return texture.getHeight();
+    }
     public void dispose() { // SpriteBatches and Textures must always be disposed
         walkSheet.dispose();
     }

@@ -4,6 +4,7 @@ import com.Game.Objects.Axe;
 import com.Game.Objects.Spear;
 import com.Game.Objects.Weapon;
 import com.Game.Utils.Animator;
+import com.Game.Utils.Constants;
 import com.Game.Utils.Hud;
 import com.Game.gamestates.Playing;
 import com.Game.myGdxGame;
@@ -15,25 +16,27 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 
+import static com.Game.Utils.Constants.PPM;
+
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
     public static String weaponChoice;
     private Animator animator = new Animator(this);
-    private World world;
-    public Body b2Body;
+    private Body playerBody;
+    private int numSprites, spriteSheetSize, spriteHeight;
     private boolean isRunning = false;
     private boolean isIdle = false;
     private Weapon weapon;
     private Texture playerRun, playerIdle;
 
-    public Player(int speed, Texture text, int x, int y, myGdxGame screen) {
+    public Player(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
-//        makePlayer();
         currentHp = 100;
         hp = 100;
         initWeapon();
 
         playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
         playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
+        playerBody = Constants.createBox((int) position.x, (int) position.y, 32, 32, false, world);
     }
     public void initWeapon(){
         if (weaponChoice.equals("spear")){
@@ -52,40 +55,29 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
             weapon.setAudio("Audio/SFX/sword_swing.wav");
         }
     }
-    public void makePlayer(){
-//        BodyDef bdef = new BodyDef();
-//        bdef.position.set(position.x, position.y);
-//        bdef.type = BodyDef.BodyType.DynamicBody;
-//        b2Body = world.createBody(bdef);
-//
-//        FixtureDef fDef = new FixtureDef();
-//        CircleShape shape = new CircleShape();
-//        shape.setRadius(5 / myGdxGame.PPM);
-//
-//        fDef.shape = shape;
-//        b2Body.createFixture(fDef);
-    }
-
-    public void update(float deltatime) {
+    public void update() {
         // Check for movement keys
         boolean isMoving = false; // Flag to track movement
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            position.y += speed * deltatime;
+        int horizontalForce = 0; //sets to zero every time, so if player doesn't move, h Force set to zero
+        int verticalForce = 0;
+        if (Gdx.input.isKeyPressed(Input.Keys.D)){
+            horizontalForce +=1;
             isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            position.x -= speed * deltatime;
+        if (Gdx.input.isKeyPressed(Input.Keys.A)){
+            horizontalForce -=1;
             isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            position.y -= speed * deltatime;
+        if (Gdx.input.isKeyPressed(Input.Keys.W)){
+            verticalForce +=1;
             isMoving = true;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            position.x += speed * deltatime;
+        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+            verticalForce -=1;
             isMoving = true;
         }
+        playerBody.setLinearVelocity(horizontalForce * 5, verticalForce * 5); //move w/ velocity of 5mps
 
         // Update animation states based on movement
         if (isMoving) {
@@ -103,6 +95,9 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public void playerRun() {
         if (!isRunning) {
+            numSprites = 6;
+            spriteSheetSize = Animator.getTextureSize(playerRun);
+            spriteHeight = Animator.getTextureHeight(playerRun);
             animator.changeColnRows(6, 1);
             animator.createAnimation(playerRun, game);
             isRunning = true; // Set the flag to true
@@ -111,6 +106,9 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public void playerIdle() {
         if (!isIdle) {
+            numSprites = 5;
+            spriteSheetSize = Animator.getTextureSize(playerIdle);
+            spriteHeight = Animator.getTextureHeight(playerIdle);
             animator.changeColnRows(5, 1);
             animator.createAnimation(playerIdle, game);
             isIdle = true; // Set the flag to true
@@ -119,14 +117,14 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void checkLeft(OrthographicCamera camera){ //find cursor location relative to the world location
         Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
         camera.unproject(touchPos);
-        left = touchPos.x < position.x;
+        left = touchPos.x < playerBody.getPosition().x * PPM;
     }
-
     public void draw() { //https://www.youtube.com/watch?v=1fJrhgc0RRw&list=PLZm85UZQLd2SXQzsF-a0-pPF6IWDDdrXt&index=11 watch this
-        update(Gdx.graphics.getDeltaTime()); //does movement
+        update(); //does movement
         checkLeft(Playing.camera);
-        animator.render((int) position.x, (int) position.y); //for some reason it can only draw one thing at a time??
-    } //if we stop drawing the player, it will draw the weapon
+        animator.render((int) (playerBody.getPosition().x * PPM) - ((spriteSheetSize / numSprites / 2)),
+                (int) (playerBody.getPosition().y * PPM) - ((spriteHeight / numSprites)));
+    }
 
     public Animator getAnimator() {
         return animator;
@@ -138,4 +136,5 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public boolean getLeft(){
         return left;
     }
+    public Body getPlayerBody(){return playerBody;}
 }

@@ -4,12 +4,14 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+import static com.Game.Utils.Constants.PPM;
+
 public class CameraStyles { //https://github.com/cnnranderson/YT_Tut1/blob/master/core/src/com/cnnranderson/tutorial/states/DungeonState.java
 
     public static void lockOnTarget(Camera camera, Vector2 target) { //massive shoutout to connor anderson the GOAT GOAT
         Vector3 position = camera.position;
-        position.x = target.x;
-        position.y = target.y;
+        position.x = target.x * PPM;
+        position.y = target.y * PPM;
         camera.position.set(position);
         camera.update();
     }
