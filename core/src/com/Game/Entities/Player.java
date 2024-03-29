@@ -21,7 +21,7 @@ import static com.Game.Utils.Constants.PPM;
 public class Player extends Entity { //https://stackoverflow.com/questions/28000623/libgdx-flip-2d-sprite-animation flip stuff
     public static String weaponChoice;
     private Animator animator = new Animator(this);
-    private Body playerBody;
+    public Body playerBody;
     private World world;
     private int numSprites, spriteSheetSize, spriteHeight;
     private boolean isRunning = false;
@@ -50,7 +50,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         }
         if (weaponChoice.equals("sword")){
             weapon = new Axe( 10, this, game);
-            weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
+            weapon.changeTextureSize("Effects/slash_effect.png", 500, 400);
             weapon.setAudio("Audio/SFX/ax_swing.wav");
         }
         if (weaponChoice.equals("gun")){

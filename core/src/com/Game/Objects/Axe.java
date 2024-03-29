@@ -15,17 +15,22 @@ public class Axe extends Weapon {
     public void attack(double time, int cd) { //y axis is weird
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 100,
-                        (int) (player.getPlayerBody().getPosition().y * PPM / 2));
+                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 50;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight( )/ numSprites / 2;
+                animator.render(x, y);
             } else {
-                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100,
-                        (int) (player.getPlayerBody().getPosition().y * PPM));
+                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 50;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight( )/ numSprites / 2;
+                animator.render(x, y);
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {
                     attacking = true;
                     sound.play();
                     lastAttackTime = time; // Update the last attack time
+                    weaponBody.setTransform(x / PPM, y / PPM, weaponBody.getAngle());
+                    System.out.println(weaponBody.getPosition().y);
+                    System.out.println(player.playerBody.getPosition().y);
                 }
                 attacking = false; // Not enough time has passed since the last attack
             }

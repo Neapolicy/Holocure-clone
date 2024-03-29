@@ -58,7 +58,6 @@ public class Weapon {
                     sound.play();
                     lastAttackTime = time; // Update the last attack time
                     weaponBody.setTransform(x / PPM, y / PPM, weaponBody.getAngle());
-                    System.out.println(weaponBody.getPosition().x);
                 }
                 attacking = false; // Not enough time has passed since the last attack
             }
