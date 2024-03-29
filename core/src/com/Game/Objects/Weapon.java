@@ -39,9 +39,11 @@ public class Weapon {
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) (player.getPlayerBody().getPosition().x * PPM), (int) (player.getPlayerBody().getPosition().y * PPM));
+                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 100,
+                        (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites());
             } else {
-                animator.render((int) (player.getPlayerBody().getPosition().x * PPM), (int) (player.getPlayerBody().getPosition().y * PPM));
+                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100,
+                        (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites());
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {

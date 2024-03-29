@@ -1,18 +1,21 @@
 package com.Game.Entities;
 
-import com.Game.Utils.Animator;
-import com.Game.gamestates.Playing;
+import com.Game.Utils.Constants;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.World;
 
 import static com.Game.Utils.Constants.PPM;
 
 public class Enemy extends Entity{
-    public Enemy(int speed, Texture text, int x, int y, myGdxGame screen) {
+    private Body enemyBody;
+    public Enemy(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
         sprite.setSize(50, 50);
+        enemyBody = Constants.createBox(x, y, 32, 32, false, world);
     }
     public void followPlayer(float deltatime, Vector2 playerPos) {
         // Update player position (you might want to do this elsewhere)

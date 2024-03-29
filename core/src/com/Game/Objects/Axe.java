@@ -5,17 +5,20 @@ import com.Game.Entities.Player;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.graphics.Texture;
 
+import static com.Game.Utils.Constants.PPM;
+
 public class Axe extends Weapon {
     public Axe(int x, int y, int damage, Player player, myGdxGame game) {
         super(x, y, damage, player, game);
     }
-
-    public void attack(double time, int cd) {
+    public void attack(double time, int cd) { //y axis is weird
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) (player.getCenterX() - sprite.getRegionWidth() / 8), (int) (player.getCenterY() - sprite.getHeight() / 2));
+                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 100,
+                        (int) (player.getPlayerBody().getPosition().y * PPM / 2));
             } else {
-                animator.render((int) (player.getCenterX() + sprite.getRegionWidth() / 8), (int) (player.getCenterY() - sprite.getHeight() / 2));
+                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100,
+                        (int) (player.getPlayerBody().getPosition().y * PPM));
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {

@@ -61,7 +61,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
     }
     public void initilizeEntities() {
         player = new Player(500, new Texture("Sprites/player_idle.png"), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, game, world);
-        enemies.add(new Enemy(300, new Texture("Sprites/bullet.png"), 300, 300, game));
+        enemies.add(new Enemy(300, new Texture("Sprites/bullet.png"), 300, 300, game, world));
     }
     public void musicMan() { //turned this off bc I don't want to hear this every time I playtest
         bgm = Gdx.audio.newMusic(Gdx.files.internal("Audio/Music/combat_music.wav"));
