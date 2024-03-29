@@ -22,6 +22,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public static String weaponChoice;
     private Animator animator = new Animator(this);
     private Body playerBody;
+    private World world;
     private int numSprites, spriteSheetSize, spriteHeight;
     private boolean isRunning = false;
     private boolean isIdle = false;
@@ -30,6 +31,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
+        this.world = world;
         currentHp = 100;
         hp = 100;
         initWeapon();
@@ -41,13 +43,13 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     }
     public void initWeapon(){
         if (weaponChoice.equals("spear")){
-            weapon = new Spear(100, 100, 10, this, game);
+            weapon = new Spear( 10, this, game);
             weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
             weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
             weapon.setAudio("Audio/SFX/spear_swing.wav");
         }
         if (weaponChoice.equals("sword")){
-            weapon = new Axe(100, 100, 10, this, game);
+            weapon = new Axe( 10, this, game);
             weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
             weapon.setAudio("Audio/SFX/ax_swing.wav");
         }
@@ -97,7 +99,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void playerRun() {
         if (!isRunning) {
             numSprites = 6;
-            spriteSheetSize = Animator.getTextureSize(playerRun);
+            spriteSheetSize = Animator.getTextureWidth(playerRun);
             spriteHeight = Animator.getTextureHeight(playerRun);
             animator.changeColnRows(6, 1);
             animator.createAnimation(playerRun, game);
@@ -108,7 +110,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void playerIdle() {
         if (!isIdle) {
             numSprites = 5;
-            spriteSheetSize = Animator.getTextureSize(playerIdle);
+            spriteSheetSize = Animator.getTextureWidth(playerIdle);
             spriteHeight = Animator.getTextureHeight(playerIdle);
             animator.changeColnRows(5, 1);
             animator.createAnimation(playerIdle, game);
@@ -142,4 +144,5 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public int getSpriteSheetSize(){return spriteSheetSize;}
 
     public int getSpriteHeight() {return spriteHeight;}
+    public World getWorld(){return world;}
 }

@@ -7,6 +7,7 @@ public class Constants {
     public static final short BIT_WALL = 1;
     public static final short BIT_PLAYER = 2;
     public static final short BIT_ENEMY = 4;
+    public static final short BIT_WEAPON = 8;
     public static Body createBox(int x, int y, int width, int height, boolean isStatic, World world, short cBits, short mBits, short gIndex){
         Body pBody;
         BodyDef def = new BodyDef();

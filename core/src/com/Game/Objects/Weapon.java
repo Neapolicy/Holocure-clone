@@ -2,12 +2,14 @@ package com.Game.Objects;
 
 import com.Game.Entities.Player;
 import com.Game.Utils.Animator;
+import com.Game.Utils.Constants;
 import com.Game.myGdxGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 
 import static com.Game.Utils.Constants.PPM;
 
@@ -15,35 +17,39 @@ public class Weapon {
     public Texture texture;
     public Player player;
     public Sprite sprite;
-    public Vector2 position;
     public Animator animator;
     public boolean attacking;
     public double lastAttackTime = 0.0;
+    public Body weaponBody;
     private int damage;
+    public int x, y;
     public Sound sound;
     public myGdxGame game;
 
-    public Weapon(int x, int y, int damage, Player player, myGdxGame game) {
+    public Weapon(int damage, Player player, myGdxGame game) {
         this.game = game;
         this.player = player;
         this.damage = damage;
         animator = new Animator(player);
-        position = new Vector2(x, y);
     }
     public void changeTextureSize(String filepath, int width, int height){
         texture = animator.changeTextureSize(filepath, width, height);
         animator.createAnimation(texture, game);
         sprite = new Sprite(texture);
+        weaponBody = Constants.createBox(x, y, 32, 32, false, player.getWorld(), Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
     }
 
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 100,
-                        (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites());
+                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 100;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites();
+                animator.render(x, y);
+                weaponBody.getPosition().set(x, y);
             } else {
-                animator.render((int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100,
-                        (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites());
+                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites();
+                animator.render(x, y);
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {

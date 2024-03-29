@@ -83,7 +83,7 @@ public class Animator{
 
         return resizedTexture; // Return the newly created texture
     }
-    public static int getTextureSize(Texture texture){
+    public static int getTextureWidth(Texture texture){
         return texture.getWidth();
     }
     public static int getTextureHeight(Texture texture){

@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import static com.Game.Utils.Constants.PPM;
 
 public class Axe extends Weapon {
-    public Axe(int x, int y, int damage, Player player, myGdxGame game) {
-        super(x, y, damage, player, game);
+    public Axe(int damage, Player player, myGdxGame game) {
+        super(damage, player, game);
     }
     public void attack(double time, int cd) { //y axis is weird
         if (time % cd > 1 && time % cd < 1.5) {
