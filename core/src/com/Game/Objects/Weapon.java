@@ -36,19 +36,19 @@ public class Weapon {
         texture = animator.changeTextureSize(filepath, width, height);
         animator.createAnimation(texture, game);
         sprite = new Sprite(texture);
-        weaponBody = Constants.createBox(x, y, 32, 32, false, player.getWorld(), Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
+        weaponBody = Constants.createBox(3000, 2000, width / 8, height, false, player.getWorld(),
+                Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
     }
 
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 100;
-                y = (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites();
+                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 50;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight( )/ 8;
                 animator.render(x, y);
-                weaponBody.getPosition().set(x, y);
             } else {
                 x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100;
-                y = (int) (player.getPlayerBody().getPosition().y * PPM) - player.getSpriteHeight()/player.getNumSprites();
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight() / 8;
                 animator.render(x, y);
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
@@ -56,6 +56,8 @@ public class Weapon {
                     attacking = true;
                     sound.play();
                     lastAttackTime = time; // Update the last attack time
+                    weaponBody.setTransform(x / PPM, y / PPM, weaponBody.getAngle());
+                    System.out.println(weaponBody.getPosition().x);
                 }
                 attacking = false; // Not enough time has passed since the last attack
             }

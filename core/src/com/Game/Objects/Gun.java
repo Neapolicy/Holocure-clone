@@ -5,6 +5,6 @@ import com.Game.myGdxGame;
 
 public class Gun extends Weapon{
     public Gun(int x, int y, int damage, Player player, myGdxGame game) {
-        super(x, y, damage, player, game);
+        super(damage, player, game);
     }
 }
