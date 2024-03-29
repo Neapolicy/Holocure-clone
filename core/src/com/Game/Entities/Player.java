@@ -27,7 +27,7 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     private boolean isRunning = false;
     private boolean isIdle = false;
     private Weapon weapon;
-    private Texture playerRun, playerIdle;
+    private Texture currentTexture;
 
     public Player(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
@@ -36,25 +36,24 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         hp = 100;
         initWeapon();
 
-        playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
-        playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
+        currentTexture = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
         playerBody = Constants.createBox(x, y, 32, 32, false, world,
                 Constants.BIT_PLAYER, Constants.BIT_WALL, (short) 0);
     }
     public void initWeapon(){
         if (weaponChoice.equals("spear")){
-            weapon = new Spear( 10, this, game);
+            weapon = new Spear( 20, this, game);
             weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
-            weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100);
+            weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100, 150, 100);
             weapon.setAudio("Audio/SFX/spear_swing.wav");
         }
         if (weaponChoice.equals("sword")){
             weapon = new Axe( 10, this, game);
-            weapon.changeTextureSize("Effects/slash_effect.png", 500, 400);
+            weapon.changeTextureSize("Effects/slash_effect.png", 500, 400, 100, 300);
             weapon.setAudio("Audio/SFX/ax_swing.wav");
         }
         if (weaponChoice.equals("gun")){
-            weapon.changeTextureSize("Effects/slash_effect.png", 500, 600);
+            weapon.changeTextureSize("Effects/slash_effect.png", 500, 600, 10, 10);
             weapon.setAudio("Audio/SFX/sword_swing.wav");
         }
     }
@@ -98,22 +97,24 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
     public void playerRun() {
         if (!isRunning) {
+            currentTexture = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
             numSprites = 6;
-            spriteSheetSize = Animator.getTextureWidth(playerRun);
-            spriteHeight = Animator.getTextureHeight(playerRun);
+            spriteSheetSize = Animator.getTextureWidth(currentTexture);
+            spriteHeight = Animator.getTextureHeight(currentTexture);
             animator.changeColnRows(6, 1);
-            animator.createAnimation(playerRun, game);
+            animator.createAnimation(currentTexture, game);
             isRunning = true; // Set the flag to true
         }
     }
 
     public void playerIdle() {
         if (!isIdle) {
+            currentTexture = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
             numSprites = 5;
-            spriteSheetSize = Animator.getTextureWidth(playerIdle);
-            spriteHeight = Animator.getTextureHeight(playerIdle);
+            spriteSheetSize = Animator.getTextureWidth(currentTexture);
+            spriteHeight = Animator.getTextureHeight(currentTexture);
             animator.changeColnRows(5, 1);
-            animator.createAnimation(playerIdle, game);
+            animator.createAnimation(currentTexture, game);
             isIdle = true; // Set the flag to true
         }
     }
@@ -143,6 +144,6 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public int getNumSprites(){return numSprites;}
     public int getSpriteSheetSize(){return spriteSheetSize;}
 
-    public int getSpriteHeight() {return spriteHeight;}
+    public Texture getTexture() {return currentTexture;}
     public World getWorld(){return world;}
 }

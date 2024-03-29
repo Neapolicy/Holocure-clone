@@ -3,7 +3,6 @@ package com.Game.gamestates;
 import com.Game.Entities.Enemy;
 import com.Game.Entities.Player;
 import com.Game.Utils.CameraStyles;
-import com.Game.Utils.Constants;
 import com.Game.Utils.Hud;
 import com.Game.Utils.TiledObjectUtil;
 import com.Game.myGdxGame;

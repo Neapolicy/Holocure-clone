@@ -23,7 +23,7 @@ public class Weapon {
     public int numSprites;
     public Body weaponBody;
     private int damage;
-    public int x, y;
+    public int width;
     public Sound sound;
     public myGdxGame game;
 
@@ -33,31 +33,29 @@ public class Weapon {
         this.damage = damage;
         animator = new Animator(player);
     }
-    public void changeTextureSize(String filepath, int width, int height){
+    public void changeTextureSize(String filepath, int width, int height, int bodWidth, int bodHeight){
         texture = animator.changeTextureSize(filepath, width, height);
         animator.createAnimation(texture, game);
         sprite = new Sprite(texture);
-        weaponBody = Constants.createBox(3000, 2000, width / numSprites, height, false, player.getWorld(),
+        weaponBody = Constants.createBox(3000, 2000, bodWidth, bodHeight, false, player.getWorld(),
                 Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
+        this.width = width / numSprites;
     }
 
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 50;
-                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight( )/ numSprites;
-                animator.render(x, y);
+                animator.render((int) (weaponBody.getPosition().x * PPM) - (50 / 2), (int) (weaponBody.getPosition().y * PPM) - (player.getTexture().getHeight() / 2));
+                weaponBody.setTransform(player.getPlayerBody().getPosition().x - width / 2 / PPM, player.getPlayerBody().getPosition().y, weaponBody.getAngle());
             } else {
-                x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100;
-                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight() / numSprites;
-                animator.render(x, y);
+                animator.render((int) (weaponBody.getPosition().x * PPM) - 25, (int) (player.playerBody.getPosition().y * PPM) - texture.getHeight() / 2);
+                weaponBody.setTransform(player.getPlayerBody().getPosition().x + width / 2 / PPM, player.getPlayerBody().getPosition().y, weaponBody.getAngle());
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {
                     attacking = true;
                     sound.play();
                     lastAttackTime = time; // Update the last attack time
-                    weaponBody.setTransform(x / PPM, y / PPM, weaponBody.getAngle());
                 }
                 attacking = false; // Not enough time has passed since the last attack
             }
