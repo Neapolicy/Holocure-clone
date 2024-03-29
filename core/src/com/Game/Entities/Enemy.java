@@ -14,25 +14,22 @@ public class Enemy extends Entity{
     private Body enemyBody;
     public Enemy(int speed, Texture text, int x, int y, myGdxGame screen, World world) {
         super(speed, text, x, y, screen);
-        sprite.setSize(50, 50);
-        enemyBody = Constants.createBox(x, y, 32, 32, false, world);
+        sprite.setSize(10, 10);
+        enemyBody = Constants.createBox(x, y, 32, 32, false, world,
+                Constants.BIT_ENEMY, Constants.BIT_WALL, (short) 0);
     }
-    public void followPlayer(float deltatime, Vector2 playerPos) {
-        // Update player position (you might want to do this elsewhere)
-        playerPos = new Vector2(playerPos.x * PPM, playerPos.y * PPM);
-
+    public void followPlayer(Vector2 playerPos) {
         // Calculate direction vector
-        Vector2 direction = new Vector2(playerPos.x - position.x, playerPos.y - position.y);
+        Vector2 direction = new Vector2(playerPos.x - enemyBody.getPosition().x,
+                playerPos.y - enemyBody.getPosition().y);
         direction.nor(); // Normalize the direction vector
 
         // Move the enemy (adjust the speed as needed)
-         // You can change this value
-        position.x += direction.x * speed * deltatime;
-        position.y += direction.y * speed * deltatime;
+        enemyBody.setLinearVelocity(direction.x * speed, direction.y * speed);
     }
     public void draw(Vector2 playerPos){
-        followPlayer(Gdx.graphics.getDeltaTime(), playerPos);
-        sprite.setPosition(position.x, position.y);
+        followPlayer(playerPos);
+        sprite.setPosition(enemyBody.getPosition().x * PPM, enemyBody.getPosition().y * PPM);
 
         sprite.draw(game.batch);
     }

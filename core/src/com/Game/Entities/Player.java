@@ -36,7 +36,8 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
 
         playerRun = animator.changeTextureSize("Sprites/player_run.png", 384, 64);
         playerIdle = animator.changeTextureSize("Sprites/player_idle.png", 320, 64);
-        playerBody = Constants.createBox(x, y, 32, 32, false, world);
+        playerBody = Constants.createBox(x, y, 32, 32, false, world,
+                Constants.BIT_PLAYER, Constants.BIT_WALL, (short) 0);
     }
     public void initWeapon(){
         if (weaponChoice.equals("spear")){
