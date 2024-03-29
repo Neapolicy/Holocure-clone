@@ -20,6 +20,7 @@ public class Weapon {
     public Animator animator;
     public boolean attacking;
     public double lastAttackTime = 0.0;
+    public int numSprites;
     public Body weaponBody;
     private int damage;
     public int x, y;
@@ -36,7 +37,7 @@ public class Weapon {
         texture = animator.changeTextureSize(filepath, width, height);
         animator.createAnimation(texture, game);
         sprite = new Sprite(texture);
-        weaponBody = Constants.createBox(3000, 2000, width / 8, height, false, player.getWorld(),
+        weaponBody = Constants.createBox(3000, 2000, width / numSprites, height, false, player.getWorld(),
                 Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
     }
 
@@ -44,11 +45,11 @@ public class Weapon {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
                 x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() - 50;
-                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight( )/ 8;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight( )/ numSprites;
                 animator.render(x, y);
             } else {
                 x= (int) (player.getPlayerBody().getPosition().x * PPM) - player.getSpriteSheetSize() / player.getNumSprites() + 100;
-                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight() / 8;
+                y = (int) (player.getPlayerBody().getPosition().y * PPM) - texture.getHeight() / numSprites;
                 animator.render(x, y);
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
