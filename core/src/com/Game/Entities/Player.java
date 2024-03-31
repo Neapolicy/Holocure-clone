@@ -43,16 +43,16 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
     public void initWeapon(){
         if (weaponChoice.equals("spear")){
             weapon = new Spear( 20, this, game);
-            weapon.changeColumnsNRows(8, 1); //then put a bunch of if statements here once i implement weapon selection
-            weapon.changeTextureSize("Effects/spear_pierce.png", 1000, 100, 150, 100);
+            weapon.changeColumnsNRows(8, 1);
+            weapon.changeTextureSize("Effects/spear_pierce.png", 1024, 100, 500, 100);
             weapon.setAudio("Audio/SFX/spear_swing.wav");
         }
-        if (weaponChoice.equals("sword")){
+        if (weaponChoice.equals("sword")){ //this isn't even meant to be a sword :sob:
             weapon = new Axe( 10, this, game);
-            weapon.changeTextureSize("Effects/slash_effect.png", 500, 400, 100, 300);
+            weapon.changeTextureSize("Effects/slash_effect.png", 500, 300, 250, 250);
             weapon.setAudio("Audio/SFX/ax_swing.wav");
         }
-        if (weaponChoice.equals("gun")){
+        if (weaponChoice.equals("gun")){ //will work on this when i finish rest of the game ig
             weapon.changeTextureSize("Effects/slash_effect.png", 500, 600, 10, 10);
             weapon.setAudio("Audio/SFX/sword_swing.wav");
         }

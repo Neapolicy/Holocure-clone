@@ -37,7 +37,7 @@ public class Weapon {
         texture = animator.changeTextureSize(filepath, width, height);
         animator.createAnimation(texture, game);
         sprite = new Sprite(texture);
-        weaponBody = Constants.createBox(3000, 2000, bodWidth, bodHeight, false, player.getWorld(),
+        weaponBody = Constants.createBox(0, 0, bodWidth / 4, bodHeight, false, player.getWorld(),
                 Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
         this.width = width / numSprites;
     }
@@ -45,11 +45,11 @@ public class Weapon {
     public void attack(double time, int cd) {
         if (time % cd > 1 && time % cd < 1.5) {
             if (player.getLeft()) {
-                animator.render((int) (weaponBody.getPosition().x * PPM) - (50 / 2), (int) (weaponBody.getPosition().y * PPM) - (player.getTexture().getHeight() / 2));
+                animator.render((int) (weaponBody.getPosition().x * PPM) - (1000 / 2), (int) (weaponBody.getPosition().y * PPM) - (player.getTexture().getHeight() / 2));
                 weaponBody.setTransform(player.getPlayerBody().getPosition().x - width / 2 / PPM, player.getPlayerBody().getPosition().y, weaponBody.getAngle());
             } else {
-                animator.render((int) (weaponBody.getPosition().x * PPM) - 25, (int) (player.playerBody.getPosition().y * PPM) - texture.getHeight() / 2);
-                weaponBody.setTransform(player.getPlayerBody().getPosition().x + width / 2 / PPM, player.getPlayerBody().getPosition().y, weaponBody.getAngle());
+                animator.render((int) (weaponBody.getPosition().x * PPM) - (1000 / 2), (int) (weaponBody.getPosition().y * PPM) - (texture.getHeight() / 2));
+                weaponBody.setTransform(player.getPlayerBody().getPosition().x + texture.getWidth()/ 8 / PPM, player.getPlayerBody().getPosition().y, weaponBody.getAngle());
             }
             if (time - lastAttackTime >= cd) { // Check if enough time has passed since the last attack
                 if (time % cd > 1 && time % cd < 1.5) {
