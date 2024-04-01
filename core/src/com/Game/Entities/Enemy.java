@@ -16,6 +16,7 @@ public class Enemy extends Entity{
         sprite.setSize(10, 10);
         enemyBody = Constants.createBox(x, y, 32, 32, false, world,
                 Constants.BIT_ENEMY, Constants.BIT_WALL, (short) 0);
+        hp = 20;
     }
     public void followPlayer(Vector2 playerPos) {
         // Calculate direction vector
@@ -31,5 +32,8 @@ public class Enemy extends Entity{
         sprite.setPosition(enemyBody.getPosition().x * PPM, enemyBody.getPosition().y * PPM);
 
         sprite.draw(game.batch);
+    }
+    public Body getEnemyBody(){
+        return enemyBody;
     }
 }

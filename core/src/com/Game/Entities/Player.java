@@ -141,9 +141,6 @@ public class Player extends Entity { //https://stackoverflow.com/questions/28000
         return left;
     }
     public Body getPlayerBody(){return playerBody;}
-    public int getNumSprites(){return numSprites;}
-    public int getSpriteSheetSize(){return spriteSheetSize;}
-
     public Texture getTexture() {return currentTexture;}
     public World getWorld(){return world;}
 }

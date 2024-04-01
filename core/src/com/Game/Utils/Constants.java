@@ -7,7 +7,7 @@ public class Constants {
     public static final short BIT_WALL = 1;
     public static final short BIT_PLAYER = 2;
     public static final short BIT_ENEMY = 4;
-    public static final short BIT_WEAPON = 8;
+    public static final short BIT_WEAPON = 8; //just make the weapon hitbox a sensor ig
     public static Body createBox(int x, int y, int width, int height, boolean isStatic, World world, short cBits, short mBits, short gIndex){
         Body Body;
         BodyDef def = new BodyDef();
@@ -20,6 +20,7 @@ public class Constants {
         def.position.set(x / PPM, y / PPM); //reason why the player box is at bottom left!!
         def.fixedRotation = true; //if false, player body will rotate
         Body = world.createBody(def);
+        Body.setUserData(Body);
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width / 2 / PPM, height / 2 / PPM); //takes it from the center, so width and height is actually 64x64, not 32x32
@@ -31,7 +32,7 @@ public class Constants {
         fdef.filter.categoryBits = cBits; //is a
         fdef.filter.maskBits = mBits; //collides with
         fdef.filter.groupIndex = gIndex;
-        Body.createFixture(fdef);
+        Body.createFixture(fdef).setUserData(Body);
 
         shape.dispose();
 

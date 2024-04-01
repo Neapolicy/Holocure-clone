@@ -1,8 +1,10 @@
 package com.Game.gamestates;
 
 import com.Game.Entities.Enemy;
+import com.Game.Entities.Entity;
 import com.Game.Entities.Player;
 import com.Game.Utils.CameraStyles;
+import com.Game.Utils.ContactListener;
 import com.Game.Utils.Hud;
 import com.Game.Utils.TiledObjectUtil;
 import com.Game.myGdxGame;
@@ -49,6 +51,7 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         camera.setToOrtho(false, w / scale, h / scale);
 
         world = new World(new Vector2(0, 0), false); //vector is x + y gravity
+        world.setContactListener(new ContactListener());
         b2dr = new Box2DDebugRenderer();
 
         initilizeEntities();
@@ -93,8 +96,13 @@ public class Playing implements Screen { //https://www.youtube.com/watch?v=Lb2vZ
         game.batch.begin();
 
         player.draw();
-        for (Enemy enemy : enemies) {
-            enemy.draw(player.getPlayerBody().getPosition());
+        for (int i = 0; i < enemies.size(); i++) {
+            if (enemies.get(i).hp > 0) enemies.get(i).draw(player.getPlayerBody().getPosition());
+            else{
+                world.destroyBody(enemies.get(i).getEnemyBody());
+                enemies.remove(i);
+                i--;
+            }
         }
         game.batch.end();
 
