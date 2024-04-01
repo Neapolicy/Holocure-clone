@@ -9,7 +9,7 @@ public class Constants {
     public static final short BIT_ENEMY = 4;
     public static final short BIT_WEAPON = 8;
     public static Body createBox(int x, int y, int width, int height, boolean isStatic, World world, short cBits, short mBits, short gIndex){
-        Body pBody;
+        Body Body;
         BodyDef def = new BodyDef();
         if (isStatic){
             def.type = BodyDef.BodyType.StaticBody;
@@ -19,7 +19,7 @@ public class Constants {
         }
         def.position.set(x / PPM, y / PPM); //reason why the player box is at bottom left!!
         def.fixedRotation = true; //if false, player body will rotate
-        pBody = world.createBody(def);
+        Body = world.createBody(def);
 
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(width / 2 / PPM, height / 2 / PPM); //takes it from the center, so width and height is actually 64x64, not 32x32
@@ -31,10 +31,10 @@ public class Constants {
         fdef.filter.categoryBits = cBits; //is a
         fdef.filter.maskBits = mBits; //collides with
         fdef.filter.groupIndex = gIndex;
-        pBody.createFixture(fdef);
+        Body.createFixture(fdef);
 
         shape.dispose();
 
-        return pBody;
+        return Body;
     }
 }
