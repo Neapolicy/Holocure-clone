@@ -38,4 +38,36 @@ public class Constants {
 
         return Body;
     }
+
+    public static Body createTriggerBody(int x, int y, int width, int height, boolean isStatic, World world, short cBits, short mBits, short gIndex){
+        Body Body;
+        BodyDef def = new BodyDef();
+        if (isStatic){
+            def.type = BodyDef.BodyType.StaticBody;
+        }
+        else{
+            def.type = BodyDef.BodyType.DynamicBody; //dynamic body allows it to move and interct with the world
+        }
+        def.position.set(x / PPM, y / PPM); //reason why the player box is at bottom left!!
+        def.fixedRotation = true; //if false, player body will rotate
+        Body = world.createBody(def);
+        Body.setUserData(Body);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(width / 2 / PPM, height / 2 / PPM); //takes it from the center, so width and height is actually 64x64, not 32x32
+
+        FixtureDef fdef = new FixtureDef();
+
+        fdef.shape = shape;
+        fdef.density = 1;
+        fdef.filter.categoryBits = cBits; //is a
+        fdef.filter.maskBits = mBits; //collides with
+        fdef.filter.groupIndex = gIndex;
+        fdef.isSensor = true;
+        Body.createFixture(fdef).setUserData(Body);
+
+        shape.dispose();
+
+        return Body;
+    }
 }

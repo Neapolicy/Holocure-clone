@@ -37,7 +37,7 @@ public class Weapon {
         texture = animator.changeTextureSize(filepath, width, height);
         animator.createAnimation(texture, game);
         sprite = new Sprite(texture);
-        weaponBody = Constants.createBox(0, 0, bodWidth / 4, bodHeight, false, player.getWorld(),
+        weaponBody = Constants.createTriggerBody(0, 0, bodWidth / 4, bodHeight, false, player.getWorld(),
                 Constants.BIT_WEAPON, Constants.BIT_ENEMY, (short) 0);
         this.width = width / numSprites;
     }
